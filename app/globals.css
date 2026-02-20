@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f5f8fc;
+  --surface: #ffffff;
+  --surface-strong: #eef3f9;
+  --surface-glass: #f7f9fd;
+  --text: #0e1a2b;
+  --muted: #4c596f;
+  --accent: #0f766e;
+  --accent-soft: #d9f2ef;
+  --border: #d4dce8;
+}
+
+.dark {
+  --bg: #071018;
+  --surface: #0d1926;
+  --surface-strong: #102033;
+  --surface-glass: #0c1724;
+  --text: #e6edf6;
+  --muted: #9aaac0;
+  --accent: #1db3a3;
+  --accent-soft: #113941;
+  --border: #1f3247;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  background-image:
+    radial-gradient(circle at 15% -10%, rgb(15 118 110 / 0.18), transparent 40%),
+    radial-gradient(circle at 85% -15%, rgb(14 26 43 / 0.12), transparent 38%);
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-manrope), "Segoe UI", sans-serif;
+}
+
+code,
+.font-mono {
+  font-family: var(--font-space-mono), "SFMono-Regular", monospace;
+}
+
+::selection {
+  background: rgb(15 118 110 / 0.25);
+}
