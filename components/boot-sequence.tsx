@@ -6,7 +6,7 @@ import { MatrixRain } from "@/components/matrix-rain";
 
 const DEFAULT_BOOT_DURATION_MS = 2000;
 
-type BootPhase = "boot" | "ready";
+type BootPhase = "boot" | "gate" | "ready";
 
 const BIOS_LINES = [
   "UEFI Firmware Utility v2.31",
@@ -25,6 +25,13 @@ const BIOS_LINES = [
   "Edge Diagnostics Service Active",
   "Telemetry Buffer Initialization... OK",
   "Portfolio Runtime Entering Interactive Mode"
+];
+
+const GATE_LOADING_LINES = [
+  "Initializing session context",
+  "Loading interface modules",
+  "Syncing navigation state",
+  "Runtime checks complete"
 ];
 
 type BootSequenceContextValue = {
@@ -52,7 +59,7 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
     }
 
     timeoutRef.current = window.setTimeout(() => {
-      setPhase("ready");
+      setPhase("gate");
     }, bootDurationMs);
 
     return () => {
@@ -67,10 +74,14 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
     setBootCycle((current) => current + 1);
   };
 
+  const enterPortfolio = () => {
+    setPhase("ready");
+  };
+
   const value = useMemo(
     () => ({
       reboot,
-      isBooting: phase === "boot"
+      isBooting: phase !== "ready"
     }),
     [phase]
   );
@@ -80,6 +91,7 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
       <MatrixRain />
       <div className="relative z-10">{children}</div>
       <BiosOverlay visible={phase === "boot"} bootCycle={bootCycle} bootDurationMs={bootDurationMs} />
+      <EnterOverlay visible={phase === "gate"} onEnter={enterPortfolio} />
     </BootSequenceContext.Provider>
   );
 }
@@ -150,6 +162,91 @@ function BiosOverlay({ visible, bootCycle, bootDurationMs }: BiosOverlayProps) {
           />
         </div>
         <p className="mt-3 text-xs text-white/80">Press F2 for Setup, ESC for Boot Menu</p>
+      </div>
+    </div>
+  );
+}
+
+type EnterOverlayProps = {
+  visible: boolean;
+  onEnter: () => void;
+};
+
+function EnterOverlay({ visible, onEnter }: EnterOverlayProps) {
+  const [loadingIndex, setLoadingIndex] = useState(0);
+  const [loadingPercent, setLoadingPercent] = useState(18);
+
+  useEffect(() => {
+    if (!visible) {
+      return;
+    }
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        onEnter();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [visible, onEnter]);
+
+  useEffect(() => {
+    if (!visible) {
+      return;
+    }
+
+    setLoadingIndex(0);
+    setLoadingPercent(18);
+
+    const interval = window.setInterval(() => {
+      setLoadingPercent((current) => {
+        const next = current + 9;
+        if (next <= 100) {
+          return next;
+        }
+
+        setLoadingIndex((index) => (index + 1) % GATE_LOADING_LINES.length);
+        return 22;
+      });
+    }, 170);
+
+    return () => window.clearInterval(interval);
+  }, [visible]);
+
+  return (
+    <div
+      className={`fixed inset-0 z-[125] flex items-center justify-center bg-black/35 p-4 backdrop-blur-md transition-opacity duration-300 ${
+        visible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      aria-hidden={!visible}
+    >
+      <div className="w-full max-w-xl rounded-2xl border border-white/30 bg-white/10 p-6 text-center text-white shadow-2xl backdrop-blur-xl sm:p-8">
+        <p className="text-xs uppercase tracking-[0.18em] text-white/80">Session Ready</p>
+        <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Enter Portfolio</h2>
+        <p className="mt-3 text-sm text-white/80">
+          Press <span className="font-semibold text-white">Enter</span> or tap the button below.
+        </p>
+        <div className="mx-auto mt-5 w-full max-w-md rounded-lg border border-white/25 bg-black/25 p-3 text-left">
+          <p className="text-[11px] uppercase tracking-[0.12em] text-white/70">Loading</p>
+          <p className="mt-1 text-sm text-white/90">
+            {GATE_LOADING_LINES[loadingIndex]} <span className="bios-cursor">_</span>
+          </p>
+          <div className="mt-3 h-1.5 w-full overflow-hidden rounded-sm border border-white/30 bg-black/40">
+            <div
+              className="h-full bg-white/90 transition-[width] duration-150"
+              style={{ width: `${loadingPercent}%` }}
+            />
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onEnter}
+          className="mt-6 inline-flex items-center justify-center rounded-lg border border-white/60 bg-white/15 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-white/25"
+        >
+          Enter Portfolio
+        </button>
       </div>
     </div>
   );
