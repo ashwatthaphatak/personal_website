@@ -21,15 +21,16 @@ export function ScrollReveal({ children, className = "", direction = "up" }: Scr
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
             setRevealed(true);
             observer.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.16,
-        rootMargin: "0px 0px -10% 0px"
+        // Keep reveal reliable for very tall mobile sections (e.g., project lists).
+        threshold: 0.01,
+        rootMargin: "0px 0px -8% 0px"
       }
     );
 

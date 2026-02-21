@@ -272,6 +272,12 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             </article>
           ))}
         </div>
+
+        {displayedProjects.length === 0 ? (
+          <p className="mt-4 text-sm text-[var(--muted)]">
+            No projects match the current search/filter. Clear filters to show all projects.
+          </p>
+        ) : null}
       </div>
     </section>
   );
