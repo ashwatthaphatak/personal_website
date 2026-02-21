@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f5f8fc;
-  --surface: #ffffff;
-  --surface-strong: #eef3f9;
-  --surface-glass: #f7f9fd;
-  --text: #0e1a2b;
-  --muted: #4c596f;
-  --accent: #0f766e;
-  --accent-soft: #d9f2ef;
-  --border: #d4dce8;
+  --bg: #edf2ea;
+  --surface: #f7faf5;
+  --surface-strong: #e7efe2;
+  --surface-glass: #f1f6ee;
+  --text: #1f3920;
+  --muted: #4f6f51;
+  --accent: #3b8c43;
+  --accent-soft: #d7e8d5;
+  --border: #b8ccb8;
 }
 
 .dark {
-  --bg: #071018;
-  --surface: #0d1926;
-  --surface-strong: #102033;
-  --surface-glass: #0c1724;
-  --text: #e6edf6;
-  --muted: #9aaac0;
-  --accent: #1db3a3;
-  --accent-soft: #113941;
-  --border: #1f3247;
+  --bg: #141815;
+  --surface: #1a1f1b;
+  --surface-strong: #212722;
+  --surface-glass: #171c18;
+  --text: #9eea6f;
+  --muted: #78aa5f;
+  --accent: #73d65a;
+  --accent-soft: #263728;
+  --border: #324133;
 }
 
 * {
@@ -41,18 +41,70 @@ html {
 body {
   min-height: 100dvh;
   background-image:
-    radial-gradient(circle at 15% -10%, rgb(15 118 110 / 0.18), transparent 40%),
-    radial-gradient(circle at 85% -15%, rgb(14 26 43 / 0.12), transparent 38%);
+    radial-gradient(circle at 14% -8%, rgb(115 214 90 / 0.12), transparent 48%),
+    radial-gradient(circle at 84% -15%, rgb(59 140 67 / 0.08), transparent 42%),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(59 140 67 / 0.025) 0,
+      rgb(59 140 67 / 0.025) 1px,
+      transparent 1px,
+      transparent 5px
+    );
   background-color: var(--bg);
   color: var(--text);
-  font-family: var(--font-manrope), "Segoe UI", sans-serif;
+  font-family:
+    "Courier New", "Lucida Console", Monaco, Menlo, "SF Mono", "SFMono-Regular", monospace;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(circle at 12% -8%, rgb(115 214 90 / 0.18), transparent 44%),
+    radial-gradient(circle at 86% -15%, rgb(115 214 90 / 0.1), transparent 40%),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(115 214 90 / 0.04) 0,
+      rgb(115 214 90 / 0.04) 1px,
+      transparent 1px,
+      transparent 5px
+    );
 }
 
 code,
 .font-mono {
-  font-family: var(--font-space-mono), "SFMono-Regular", monospace;
+  font-family: "SF Mono", Menlo, Monaco, "SFMono-Regular", "Courier New", monospace;
+}
+
+.reveal-block {
+  will-change: transform, opacity, filter;
+}
+
+.reveal-block--pending {
+  opacity: 0;
+  transform: translateY(36px) scale(0.975);
+  filter: blur(3px);
+}
+
+.reveal-block--in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 560ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 560ms ease-out;
 }
 
 ::selection {
-  background: rgb(15 118 110 / 0.25);
+  background: rgb(115 214 90 / 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-block,
+  .reveal-block--pending,
+  .reveal-block--in {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
 }

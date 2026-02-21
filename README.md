@@ -8,6 +8,8 @@ Minimal one-page personal website built with **Next.js (App Router)**, **TypeScr
 - Tailwind CSS
 
 ## Local Setup
+Use Node `22` (see `.nvmrc`).
+
 1. Install dependencies:
    ```bash
    npm install
@@ -18,6 +20,28 @@ Minimal one-page personal website built with **Next.js (App Router)**, **TypeScr
    ```
 3. Open `http://localhost:3000`.
 
+## Environment
+Copy the template before running locally:
+
+```bash
+cp .env.example .env.local
+```
+
+Current variables:
+- `NEXT_TELEMETRY_DISABLED`
+- `NEXT_PUBLIC_SITE_URL`
+
+## Docker
+### Dev container (hot reload)
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+### Production-like container
+```bash
+docker compose up --build
+```
+
 ## Project Structure
 ```text
 app/
@@ -25,6 +49,8 @@ app/
   layout.tsx
   page.tsx
 components/
+  github-activity-section.tsx
+  profile-image.tsx
   projects-section.tsx
   site-header.tsx
   skills-section.tsx
@@ -37,9 +63,16 @@ content/
   tracks.ts
   types.ts
 public/
+  images/
   resume/
     Ashwattha_Phatak_Infra.pdf
 ```
+
+## Profile Photo + GitHub Activity
+- Hero photo source lives in `content/profile.ts` as `profile.photo.src`.
+- Default path is `/images/linkedin-profile.jpg`; place your LinkedIn headshot at `public/images/linkedin-profile.jpg`.
+- If the local image is missing, the site falls back to your GitHub avatar.
+- GitHub activity chart is rendered from `ghchart.rshah.org` using `profile.githubUsername`.
 
 ## Content Updates
 All portfolio content is centralized in `content/`.

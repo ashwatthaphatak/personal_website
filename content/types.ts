@@ -1,4 +1,4 @@
-export type TrackId = "infra" | "distributed" | "ml-ai" | "robotics";
+export type TrackId = "distributed-infra" | "ml-ai-robotics";
 
 export type SkillGroupId =
   | "languages"
@@ -18,9 +18,15 @@ export type Profile = {
   location: string;
   email: string;
   phone: string;
+  githubUsername: string;
   tagline: string;
   about: string;
   interests: string[];
+  photo: {
+    src: string;
+    alt: string;
+    fallbackSrc?: string;
+  };
   links: {
     github: string;
     linkedin: string;

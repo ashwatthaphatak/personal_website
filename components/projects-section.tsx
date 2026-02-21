@@ -171,17 +171,19 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               ))}
             </div>
 
-            {project.links && project.links.length > 0 ? (
+            {project.links && project.links.filter((link) => link.href.trim() !== "#").length > 0 ? (
               <div className="mt-4 flex flex-wrap gap-2">
-                {project.links.map((link) => (
-                  <a
-                    key={`${project.id}-${link.label}`}
-                    href={link.href}
-                    className="text-sm font-medium text-[var(--accent)] transition hover:opacity-80"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {project.links
+                  .filter((link) => link.href.trim() !== "#")
+                  .map((link) => (
+                    <a
+                      key={`${project.id}-${link.label}`}
+                      href={link.href}
+                      className="text-sm font-medium text-[var(--accent)] transition hover:opacity-80"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
               </div>
             ) : null}
           </article>

@@ -114,7 +114,7 @@ export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
                 onClick={() => setTrackId(track.id)}
                 className={`rounded-lg px-3 py-2 text-xs font-medium transition sm:text-sm ${
                   isActive
-                    ? "bg-[var(--accent)] text-white shadow-sm"
+                    ? "border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--text)] shadow-sm"
                     : "text-[var(--muted)] hover:bg-[var(--surface-strong)] hover:text-[var(--text)]"
                 }`}
               >

@@ -13,8 +13,7 @@ export const projects: Project[] = [
       "Implemented crash-consistent journaling for safer recovery under concurrent operations.",
       "Built socket-based inter-node metadata synchronization to preserve consistency across nodes."
     ],
-    tags: ["distributed", "filesystems", "systems", "infra", "reliability"],
-    links: [{ label: "Repo", href: "#" }]
+    tags: ["distributed", "filesystems", "systems", "infra", "reliability"]
   },
   {
     id: "xinu-kernel",
@@ -28,8 +27,7 @@ export const projects: Project[] = [
       "Built demand paging with multi-level page tables and page-fault handling for 4GB virtual memory per process.",
       "Validated behavior using low-level debugging and workload-based scheduler tests."
     ],
-    tags: ["systems", "os", "infra", "kernel", "reliability"],
-    links: [{ label: "Repo", href: "#" }]
+    tags: ["systems", "os", "infra", "kernel", "reliability"]
   },
   {
     id: "semantic-concurrency-control",
@@ -43,8 +41,7 @@ export const projects: Project[] = [
       "Implemented optimistic commit-time validation for multi-writer coordination.",
       "Reduced semantic race conditions in shared memory for LLM-style agent workflows."
     ],
-    tags: ["distributed", "consistency", "concurrency", "ml-ai", "agents"],
-    links: [{ label: "Paper", href: "#" }]
+    tags: ["distributed", "consistency", "concurrency", "ml-ai", "agents"]
   },
   {
     id: "ros2-navigation",
@@ -58,8 +55,7 @@ export const projects: Project[] = [
       "Implemented and compared Kalman and Particle Filters for robust localization under sensor uncertainty.",
       "Evaluated SARSA and Q-Learning policies for autonomous exploration efficiency."
     ],
-    tags: ["robotics", "autonomy", "navigation", "ml-ai", "perception"],
-    links: [{ label: "Demo", href: "#" }]
+    tags: ["robotics", "autonomy", "navigation", "ml-ai", "perception"]
   },
   {
     id: "lidar-perception-benchmark",
@@ -73,8 +69,7 @@ export const projects: Project[] = [
       "Benchmarked PointPillars and PV-RCNN across input resolutions for latency and accuracy.",
       "Quantified recall/AP sensitivity to spatial resolution and metadata fidelity."
     ],
-    tags: ["perception", "ml-ai", "robotics", "benchmarking", "reliability"],
-    links: [{ label: "Write-up", href: "#" }]
+    tags: ["perception", "ml-ai", "robotics", "benchmarking", "reliability"]
   },
   {
     id: "carla-traffic-sign",
@@ -88,8 +83,7 @@ export const projects: Project[] = [
       "Built a proximity-based control trigger to convert detections into vehicle actions.",
       "Measured end-to-end response timing for real-time control feasibility."
     ],
-    tags: ["robotics", "perception", "ml-ai", "vision", "autonomy"],
-    links: [{ label: "Demo", href: "#" }]
+    tags: ["robotics", "perception", "ml-ai", "vision", "autonomy"]
   },
   {
     id: "vaxel",
@@ -103,7 +97,6 @@ export const projects: Project[] = [
       "Implemented attack simulation modules for robustness testing under deepfake-style transforms.",
       "Built an on-device desktop UX with Tauri + Python sidecar for private inference."
     ],
-    tags: ["ml-ai", "vision", "security", "infra", "perception"],
-    links: [{ label: "Repo", href: "#" }]
+    tags: ["ml-ai", "vision", "security", "infra", "perception"]
   }
 ];
