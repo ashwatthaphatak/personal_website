@@ -139,6 +139,45 @@ body {
   padding: 0.35rem 0.65rem;
 }
 
+.scroll-progress {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 80;
+  background: rgb(0 0 0 / 0.06);
+}
+
+.scroll-progress__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), rgb(255 207 172), var(--accent));
+  background-size: 180% 100%;
+  animation: progressSheen 3.2s linear infinite;
+}
+
+.interactive-card {
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 260ms ease,
+    border-color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow);
+  }
+}
+
+.timeline-node {
+  animation: timelinePulse 2.4s ease-in-out infinite;
+}
+
 @media (min-width: 640px) {
   .section-card {
     padding: 1.5rem;
@@ -176,7 +215,34 @@ code,
   color: var(--text);
 }
 
+@keyframes progressSheen {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 180% 0%;
+  }
+}
+
+@keyframes timelinePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .scroll-progress__fill,
+  .timeline-node,
+  .interactive-card {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
   .reveal-block,
   .reveal-block--pending,
   .reveal-block--in {

@@ -2,6 +2,7 @@ import { GitHubActivitySection } from "@/components/github-activity-section";
 import { ProfileImage } from "@/components/profile-image";
 import { ProjectsSection } from "@/components/projects-section";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
 import { SkillsSection } from "@/components/skills-section";
 import { TrackProvider } from "@/components/track-context";
@@ -16,6 +17,7 @@ export default function HomePage() {
 
   return (
     <TrackProvider tracks={tracks} initialTrack="distributed-infra">
+      <ScrollProgress />
       <SiteHeader sections={navSections} siteName={profile.name} />
 
       <main className="mx-auto w-full max-w-7xl px-4 pb-20 pt-6 sm:px-6 sm:pt-8">
@@ -72,7 +74,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <aside className="rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 shadow-[var(--panel-shadow)]">
+            <aside className="interactive-card rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 shadow-[var(--panel-shadow)]">
               <div className="flex items-center gap-4">
                 <ProfileImage
                   src={profile.photo.src}
@@ -172,9 +174,9 @@ export default function HomePage() {
                 {experience.map((role) => (
                   <article
                     key={role.id}
-                    className="relative mb-5 rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 last:mb-0"
+                    className="interactive-card relative mb-5 rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 last:mb-0"
                   >
-                    <span className="absolute -left-[1.9rem] top-7 h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--bg)]" />
+                    <span className="timeline-node absolute -left-[1.9rem] top-7 h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--bg)]" />
 
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
                       <div>

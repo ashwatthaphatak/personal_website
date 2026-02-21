@@ -23,6 +23,11 @@ export function SkillsSection({ groups }: SkillsSectionProps) {
     });
   }, [activeTrack.skillOrder, groups]);
 
+  const maxGroupItems = useMemo(
+    () => groups.reduce((maximum, group) => Math.max(maximum, group.items.length), 1),
+    [groups]
+  );
+
   return (
     <section id="skills" className="section-shell">
       <div className="section-card">
@@ -39,17 +44,26 @@ export function SkillsSection({ groups }: SkillsSectionProps) {
         <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {orderedGroups.map((group) => {
             const highlighted = activeTrack.highlightSkillGroups.includes(group.id);
+            const fillPercentage = Math.max(24, Math.round((group.items.length / maxGroupItems) * 100));
 
             return (
               <article
                 key={group.id}
-                className={`rounded-2xl border p-4 transition ${
+                className={`interactive-card rounded-2xl border p-4 transition ${
                   highlighted
                     ? "border-[var(--accent)] bg-[var(--accent-soft)] shadow-[var(--button-shadow)]"
                     : "border-[var(--border)] bg-[var(--surface-strong)]"
                 }`}
               >
                 <h3 className="text-base font-semibold uppercase tracking-[0.08em] text-[var(--text)]">{group.title}</h3>
+                <div className="mt-2 h-1.5 w-full rounded-full bg-[var(--surface)]">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${
+                      highlighted ? "bg-[var(--text)]" : "bg-[var(--accent)]"
+                    }`}
+                    style={{ width: `${fillPercentage}%` }}
+                  />
+                </div>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {group.items.map((item) => (
                     <li

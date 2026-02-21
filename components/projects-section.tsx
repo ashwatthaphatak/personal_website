@@ -227,7 +227,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           {visibleProjects.map((project) => (
             <article
               key={project.id}
-              className="group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 pl-6 transition hover:border-[var(--accent)]"
+              className="interactive-card group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 pl-6 transition hover:border-[var(--accent)]"
             >
               <span className="absolute inset-y-0 left-0 w-1 bg-[var(--accent)]" />
 
