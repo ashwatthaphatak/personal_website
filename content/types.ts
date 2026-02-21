@@ -31,7 +31,10 @@ export type Profile = {
   links: {
     github: string;
     linkedin: string;
-    resume: string;
+    resumes: {
+      label: string;
+      href: string;
+    }[];
   };
 };
 

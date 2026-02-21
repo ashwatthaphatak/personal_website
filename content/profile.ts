@@ -36,7 +36,16 @@ My interests sit across operating systems, distributed systems, computer network
   links: {
     github: "https://github.com/ashwatthaphatak",
     linkedin: "https://www.linkedin.com/in/ashwatthaphatak/",
-    resume: "/resume/Ashwattha_Phatak_Infra.pdf"
+    resumes: [
+      {
+        label: "Download Distributed Resume",
+        href: "/resume/Ashwattha_Phatak_Distributed.pdf"
+      },
+      {
+        label: "Download ML/AI Resume",
+        href: "/resume/Ashwattha_Phatak_MLAI.pdf"
+      }
+    ]
   }
 };
 
@@ -47,6 +56,5 @@ export const navSections: NavSection[] = [
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Technical Skills" },
   { id: "github-activity", label: "GitHub Activity" },
-  { id: "interests", label: "Interests" },
   { id: "connect", label: "Let's Connect" }
 ];

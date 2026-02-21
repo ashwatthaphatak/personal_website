@@ -65,7 +65,8 @@ content/
 public/
   images/
   resume/
-    Ashwattha_Phatak_Infra.pdf
+    Ashwattha_Phatak_Distributed.pdf
+    Ashwattha_Phatak_MLAI.pdf
 ```
 
 ## Profile Photo + GitHub Activity
@@ -85,7 +86,7 @@ All portfolio content is centralized in `content/`.
 
 ### Typical edits
 - Add a new project: append to `projects` in `content/projects.ts`
-- Update resume button file: change `profile.links.resume` in `content/profile.ts`
+- Update resume download options: change `profile.links.resumes` in `content/profile.ts`
 - Tune track filtering: edit `featuredProjectTags` in `content/tracks.ts`
 
 ## Deploy to Vercel

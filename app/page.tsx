@@ -88,13 +88,23 @@ export default function HomePage() {
             >
               LinkedIn
             </a>
-            <a
-              href={profile.links.resume}
-              className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
-              download
-            >
-              Download Resume
-            </a>
+            <details className="group relative">
+              <summary className="list-none cursor-pointer rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)] [&::-webkit-details-marker]:hidden">
+                Download Resume
+              </summary>
+              <div className="absolute left-0 z-20 mt-2 flex min-w-64 flex-col gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 shadow-sm">
+                {profile.links.resumes.map((resume) => (
+                  <a
+                    key={resume.href}
+                    href={resume.href}
+                    download
+                    className="rounded-md px-3 py-2 text-sm text-[var(--text)] transition hover:bg-[var(--surface-strong)]"
+                  >
+                    {resume.label}
+                  </a>
+                ))}
+              </div>
+            </details>
           </div>
         </section>
 
@@ -149,22 +159,6 @@ export default function HomePage() {
 
         <ScrollReveal>
           <GitHubActivitySection username={profile.githubUsername} profileUrl={profile.links.github} />
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <section id="interests" className="scroll-mt-40 py-8 sm:py-10">
-            <h2 className="text-xl font-semibold text-[var(--text)]">Interests</h2>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {profile.interests.map((interest) => (
-                <span
-                  key={interest}
-                  className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm text-[var(--muted)]"
-                >
-                  {interest}
-                </span>
-              ))}
-            </div>
-          </section>
         </ScrollReveal>
 
         <ScrollReveal>

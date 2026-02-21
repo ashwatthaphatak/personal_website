@@ -29,16 +29,28 @@ export const experience: ExperienceRole[] = [
     ]
   },
   {
-    id: "state-street",
+    id: "state-street-full-time",
     organization: "State Street",
-    title: "SRE / Software Engineer / Automation Intern",
-    dates: "Jan 2023 - Jul 2024",
+    title: "Site-Developability Engineer",
+    dates: "Jul 2023 - Jul 2024",
     location: "Bangalore, India",
     bullets: [
       "Supported hedge-ledger and financial platforms through incident response and production change workflows to improve service stability.",
       "Coordinated product owners and core engineering teams to reduce operational risk during releases and incident recovery windows.",
-      "Built reliability dashboards in React to centralize infrastructure health signals and speed up production triage.",
+      "Improved production deployability and operational readiness by tightening release checks and runbook-driven recovery workflows.",
       "Automated operational reporting and reliability visibility workflows for day-to-day SRE operations."
+    ]
+  },
+  {
+    id: "state-street-internship",
+    organization: "State Street",
+    title: "Cloud Infrastructure Intern",
+    dates: "Jan 2023 - Jun 2023",
+    location: "Bangalore, India",
+    bullets: [
+      "Built reliability dashboards in React to centralize infrastructure health signals and speed up production triage.",
+      "Assisted cloud infrastructure monitoring and incident triage by consolidating service-health metrics across environments.",
+      "Supported automation scripts and operational tooling to reduce repetitive manual tasks in infrastructure workflows."
     ]
   }
 ];
