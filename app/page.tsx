@@ -99,8 +99,9 @@ export default function HomePage() {
         </section>
 
         <ScrollReveal>
-          <section id="about" className="scroll-mt-40 py-14 sm:py-16">
-            <div className="mt-4 space-y-4">
+          <section id="about" className="scroll-mt-40 py-8 sm:py-10">
+            <h2 className="text-xl font-semibold text-[var(--text)]">About Me</h2>
+            <div className="mt-3 space-y-4">
               {profile.about.split("\n\n").map((paragraph) => (
                 <p key={paragraph} className="text-base leading-7 text-[var(--muted)] [text-align:justify]">
                   {paragraph}
@@ -111,8 +112,9 @@ export default function HomePage() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <section id="experience" className="scroll-mt-40 py-14 sm:py-16">
-            <div className="mt-6 grid gap-4">
+          <section id="experience" className="scroll-mt-40 py-8 sm:py-10">
+            <h2 className="text-xl font-semibold text-[var(--text)]">Experience</h2>
+            <div className="mt-4 grid gap-4">
               {experience.map((role) => (
                 <article key={role.id} className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
@@ -150,8 +152,9 @@ export default function HomePage() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <section id="interests" className="scroll-mt-40 py-14 sm:py-16">
-            <div className="mt-5 flex flex-wrap gap-2">
+          <section id="interests" className="scroll-mt-40 py-8 sm:py-10">
+            <h2 className="text-xl font-semibold text-[var(--text)]">Interests</h2>
+            <div className="mt-3 flex flex-wrap gap-2">
               {profile.interests.map((interest) => (
                 <span
                   key={interest}
@@ -169,7 +172,8 @@ export default function HomePage() {
             id="connect"
             className="scroll-mt-40 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8"
           >
-            <p className="mt-2 text-sm text-[var(--muted)]">
+            <h2 className="text-xl font-semibold text-[var(--text)]">Let&apos;s Connect</h2>
+            <p className="mt-3 text-sm text-[var(--muted)]">
               Open to conversations around systems, distributed infrastructure, robotics, and perception engineering.
             </p>
 

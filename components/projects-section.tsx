@@ -82,8 +82,9 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
   };
 
   return (
-    <section id="projects" className="scroll-mt-40 py-14 sm:py-16">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-end">
+    <section id="projects" className="scroll-mt-40 py-8 sm:py-10">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <h2 className="text-xl font-semibold text-[var(--text)]">Projects</h2>
         <span className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--muted)]">
           {visibleProjects.length} shown
         </span>

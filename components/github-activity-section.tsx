@@ -7,8 +7,9 @@ export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySe
   const chartUrl = `https://ghchart.rshah.org/0f766e/${username}`;
 
   return (
-    <section id="github-activity" className="scroll-mt-40 py-14 sm:py-16">
-      <p className="text-sm text-[var(--muted)]">
+    <section id="github-activity" className="scroll-mt-40 py-8 sm:py-10">
+      <h2 className="text-xl font-semibold text-[var(--text)]">GitHub Activity</h2>
+      <p className="mt-2 text-sm text-[var(--muted)]">
         Live contribution history from{" "}
         <a
           href={profileUrl}
