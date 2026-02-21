@@ -5,8 +5,8 @@
   --surface: #f7faf5;
   --surface-strong: #e7efe2;
   --surface-glass: #f1f6ee;
-  --text: #1f3920;
-  --muted: #4f6f51;
+  --text: #142a15;
+  --muted: #2f4e32;
   --accent: #3b8c43;
   --accent-soft: #d7e8d5;
   --border: #b8ccb8;
@@ -17,8 +17,8 @@
   --surface: #1a1f1b;
   --surface-strong: #212722;
   --surface-glass: #171c18;
-  --text: #9eea6f;
-  --muted: #78aa5f;
+  --text: #b9ff86;
+  --muted: #97d06f;
   --accent: #73d65a;
   --accent-soft: #263728;
   --border: #324133;
@@ -52,6 +52,9 @@ body {
     );
   background-color: var(--bg);
   color: var(--text);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 500;
   font-family:
     "Courier New", "Lucida Console", Monaco, Menlo, "SF Mono", "SFMono-Regular", monospace;
 }
