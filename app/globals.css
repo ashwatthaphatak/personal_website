@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #edf2ea;
-  --surface: #f7faf5;
-  --surface-strong: #e7efe2;
-  --surface-glass: #f1f6ee;
-  --text: #142a15;
-  --muted: #2f4e32;
-  --accent: #3b8c43;
-  --accent-soft: #d7e8d5;
-  --border: #b8ccb8;
+  --bg: #eef5f8;
+  --surface: #f8fcfe;
+  --surface-strong: #e4eef3;
+  --surface-glass: #f2f8fb;
+  --text: #0a3f52;
+  --muted: #2b5f73;
+  --accent: #0b7a92;
+  --accent-soft: #d4eaf1;
+  --border: #b9d3dd;
 }
 
 .dark {
-  --bg: #141815;
-  --surface: #1a1f1b;
-  --surface-strong: #212722;
-  --surface-glass: #171c18;
-  --text: #b9ff86;
-  --muted: #97d06f;
-  --accent: #73d65a;
-  --accent-soft: #263728;
-  --border: #324133;
+  --bg: #111a1f;
+  --surface: #172229;
+  --surface-strong: #203038;
+  --surface-glass: #141e24;
+  --text: #7fd7ea;
+  --muted: #62afc0;
+  --accent: #2eb6cf;
+  --accent-soft: #1b3a46;
+  --border: #2c4a55;
 }
 
 * {
@@ -41,12 +41,12 @@ html {
 body {
   min-height: 100dvh;
   background-image:
-    radial-gradient(circle at 14% -8%, rgb(115 214 90 / 0.12), transparent 48%),
-    radial-gradient(circle at 84% -15%, rgb(59 140 67 / 0.08), transparent 42%),
+    radial-gradient(circle at 14% -8%, rgb(46 182 207 / 0.14), transparent 48%),
+    radial-gradient(circle at 84% -15%, rgb(11 122 146 / 0.08), transparent 42%),
     repeating-linear-gradient(
       to bottom,
-      rgb(59 140 67 / 0.025) 0,
-      rgb(59 140 67 / 0.025) 1px,
+      rgb(11 122 146 / 0.025) 0,
+      rgb(11 122 146 / 0.025) 1px,
       transparent 1px,
       transparent 5px
     );
@@ -61,12 +61,12 @@ body {
 
 .dark body {
   background-image:
-    radial-gradient(circle at 12% -8%, rgb(115 214 90 / 0.18), transparent 44%),
-    radial-gradient(circle at 86% -15%, rgb(115 214 90 / 0.1), transparent 40%),
+    radial-gradient(circle at 12% -8%, rgb(46 182 207 / 0.2), transparent 44%),
+    radial-gradient(circle at 86% -15%, rgb(46 182 207 / 0.11), transparent 40%),
     repeating-linear-gradient(
       to bottom,
-      rgb(115 214 90 / 0.04) 0,
-      rgb(115 214 90 / 0.04) 1px,
+      rgb(46 182 207 / 0.05) 0,
+      rgb(46 182 207 / 0.05) 1px,
       transparent 1px,
       transparent 5px
     );
@@ -98,7 +98,7 @@ code,
 }
 
 ::selection {
-  background: rgb(115 214 90 / 0.28);
+  background: rgb(46 182 207 / 0.28);
 }
 
 @media (prefers-reduced-motion: reduce) {
