@@ -36,6 +36,7 @@ My interests sit across operating systems, distributed systems, computer network
   links: {
     github: "https://github.com/ashwatthaphatak",
     linkedin: "https://www.linkedin.com/in/ashwatthaphatak/",
+    calendly: "https://calendly.com/ashwatthap/30min",
     resumes: [
       {
         label: "Download Distributed Resume",

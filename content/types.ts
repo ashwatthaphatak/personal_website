@@ -31,6 +31,7 @@ export type Profile = {
   links: {
     github: string;
     linkedin: string;
+    calendly: string;
     resumes: {
       label: string;
       href: string;

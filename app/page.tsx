@@ -173,8 +173,16 @@ export default function HomePage() {
 
             <div className="mt-5 flex flex-wrap gap-3">
               <a
-                href={`mailto:${profile.email}`}
+                href={profile.links.calendly}
+                target="_blank"
+                rel="noreferrer"
                 className="rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:brightness-105"
+              >
+                Book on Calendly
+              </a>
+              <a
+                href={`mailto:${profile.email}`}
+                className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
               >
                 {profile.email}
               </a>

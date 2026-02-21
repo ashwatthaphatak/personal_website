@@ -24,32 +24,60 @@ export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
   useEffect(() => {
     const observedSections = sectionIds
       .map((id) => document.getElementById(id))
-      .filter((element): element is HTMLElement => Boolean(element));
+      .filter((element): element is HTMLElement => Boolean(element))
+      .sort((a, b) => a.offsetTop - b.offsetTop);
 
     if (observedSections.length === 0) {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    let frame = 0;
 
-        if (visible[0]) {
-          setActiveSection(visible[0].target.id);
+    const updateActiveSection = () => {
+      frame = 0;
+
+      const markerY = window.scrollY + 190;
+      let nextActiveId = observedSections[0].id;
+
+      for (const section of observedSections) {
+        if (section.offsetTop <= markerY) {
+          nextActiveId = section.id;
+        } else {
+          break;
         }
-      },
-      {
-        threshold: [0.25, 0.4, 0.6],
-        rootMargin: "-40% 0px -45% 0px"
       }
-    );
 
-    observedSections.forEach((section) => observer.observe(section));
+      const isAtPageBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+      if (isAtPageBottom) {
+        nextActiveId = observedSections[observedSections.length - 1].id;
+      }
+
+      setActiveSection((currentId) => (currentId === nextActiveId ? currentId : nextActiveId));
+    };
+
+    const queueUpdate = () => {
+      if (frame) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    queueUpdate();
+    window.addEventListener("scroll", queueUpdate, { passive: true });
+    window.addEventListener("resize", queueUpdate);
+    window.addEventListener("hashchange", queueUpdate);
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", queueUpdate);
+      window.removeEventListener("resize", queueUpdate);
+      window.removeEventListener("hashchange", queueUpdate);
+
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
     };
   }, [sectionIds]);
 
