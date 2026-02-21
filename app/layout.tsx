@@ -8,11 +8,10 @@ const themeInitializationScript = `
   try {
     const key = 'theme-preference';
     const stored = localStorage.getItem(key);
-    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const theme = stored || system;
+    const theme = stored || 'dark';
     document.documentElement.classList.toggle('dark', theme === 'dark');
   } catch (_) {
-    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('dark');
   }
 })();
 `;

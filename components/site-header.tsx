@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { useBootSequence } from "@/components/boot-sequence";
 import type { NavSection } from "@/content/types";
 
 const THEME_STORAGE_KEY = "theme-preference";
@@ -14,6 +15,7 @@ type SiteHeaderProps = {
 export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
   const [activeSection, setActiveSection] = useState<string>(sections[0]?.id ?? "hero");
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const { reboot, isBooting } = useBootSequence();
 
   const sectionIds = useMemo(() => sections.map((section) => section.id), [sections]);
 
@@ -123,6 +125,16 @@ export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
             })}
           </nav>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={reboot}
+              disabled={isBooting}
+              className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-2 text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)] disabled:opacity-50"
+              aria-label="Reboot website"
+              title="Reboot website"
+            >
+              <PowerIcon />
+            </button>
             <div
               className="inline-flex items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-1"
               role="group"
@@ -175,6 +187,15 @@ function MoonIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
       <path d="M20 14.8a8.2 8.2 0 1 1-10.8-10.7A7.1 7.1 0 0 0 20 14.8Z" />
+    </svg>
+  );
+}
+
+function PowerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.9">
+      <path d="M12 3.1v8.1" />
+      <path d="M17.7 5.8a8 8 0 1 1-11.4 0" />
     </svg>
   );
 }

@@ -4,7 +4,7 @@ type GitHubActivitySectionProps = {
 };
 
 export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySectionProps) {
-  const chartUrl = `https://ghchart.rshah.org/0f766e/${username}`;
+  const chartUrl = `https://ghchart.rshah.org/ff3047/${username}`;
 
   return (
     <section id="github-activity" className="section-shell">
@@ -23,11 +23,11 @@ export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySe
           .
         </p>
 
-        <div className="mt-6 overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-3 sm:p-4">
+        <div className="mt-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-2 sm:p-3">
           <img
             src={chartUrl}
             alt={`${username} GitHub contribution chart`}
-            className="min-w-[760px] rounded-lg border border-[var(--border)] bg-white p-2"
+            className="block h-auto w-[108%] max-w-none -translate-x-[4%] rounded-lg border border-[var(--border)] bg-white p-2"
             loading="lazy"
           />
         </div>

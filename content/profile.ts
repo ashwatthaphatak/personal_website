@@ -29,9 +29,9 @@ My interests sit across operating systems, distributed systems, computer network
     "Robotics/Perception Engineer"
   ],
   photo: {
-    src: "https://github.com/ashwatthaphatak.png?size=400",
+    src: "/images/linkedin-profile.JPG",
     alt: "Ashwattha Phatak profile photo",
-    fallbackSrc: "/images/linkedin-profile.jpg"
+    fallbackSrc: "https://github.com/ashwatthaphatak.png?size=400"
   },
   links: {
     github: "https://github.com/ashwatthaphatak",
@@ -56,6 +56,5 @@ export const navSections: NavSection[] = [
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Technical Skills" },
-  { id: "github-activity", label: "GitHub Activity" },
-  { id: "connect", label: "Let's Connect" }
+  { id: "github-activity", label: "GitHub Activity" }
 ];
