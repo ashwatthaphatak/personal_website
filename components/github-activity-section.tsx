@@ -117,23 +117,21 @@ export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySe
   return (
     <section id="github-activity" className="section-shell">
       <div className="section-card">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">GitHub Activity</h2>
-            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-              Live contribution history from{" "}
-              <a
-                href={profileUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-[var(--accent)] underline decoration-transparent underline-offset-2 transition hover:decoration-current"
-              >
-                @{username}
-              </a>
-              .
-            </p>
-          </div>
-          <p className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
+        <div>
+          <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">GitHub Activity</h2>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            Live contribution history from{" "}
+            <a
+              href={profileUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-[var(--accent)] underline decoration-transparent underline-offset-2 transition hover:decoration-current"
+            >
+              @{username}
+            </a>
+            .
+          </p>
+          <p className="mt-3 inline-flex rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
             {data ? `${formatCount(data.totalContributions)} contributions` : "Loading"}
           </p>
         </div>
@@ -158,7 +156,7 @@ export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySe
           })}
         </div>
 
-        <div className="mt-4 rounded-xl border border-[var(--border)] bg-[var(--surface-strong)] p-1.5 sm:p-2">
+        <div className="mt-4">
           {isLoading ? (
             <p className="text-sm text-[var(--muted)]">Loading contribution graph...</p>
           ) : null}
@@ -174,25 +172,27 @@ export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySe
 
           {!isLoading && !error && data ? (
             <div className="overflow-x-auto">
-              <div className="inline-flex gap-[2px] rounded-md border border-[var(--border)] bg-[var(--surface)] p-1.5">
-                {data.weeks.map((week, weekIndex) => (
-                  <div key={`${week.contributionDays[0]?.date ?? "week"}-${weekIndex}`} className="grid grid-rows-7 gap-[2px]">
-                    {week.contributionDays.map((day) => {
-                      const level = contributionLevel(day.contributionCount, data.maxContributionCount);
-                      const label = `${day.date}: ${day.contributionCount} contributions`;
+              <div className="inline-block rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] p-1.5">
+                <div className="inline-flex gap-[2px] rounded-md border border-[var(--border)] bg-[var(--surface)] p-1.5">
+                  {data.weeks.map((week, weekIndex) => (
+                    <div key={`${week.contributionDays[0]?.date ?? "week"}-${weekIndex}`} className="grid grid-rows-7 gap-[2px]">
+                      {week.contributionDays.map((day) => {
+                        const level = contributionLevel(day.contributionCount, data.maxContributionCount);
+                        const label = `${day.date}: ${day.contributionCount} contributions`;
 
-                      return (
-                        <span
-                          key={day.date}
-                          title={label}
-                          aria-label={label}
-                          className="h-2 w-2 rounded-[2px] border border-black/20"
-                          style={{ backgroundColor: LEVEL_COLORS[level] }}
-                        />
-                      );
-                    })}
-                  </div>
-                ))}
+                        return (
+                          <span
+                            key={day.date}
+                            title={label}
+                            aria-label={label}
+                            className="h-2 w-2 rounded-[2px] border border-black/20"
+                            style={{ backgroundColor: LEVEL_COLORS[level] }}
+                          />
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : null}

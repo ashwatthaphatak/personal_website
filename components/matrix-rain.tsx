@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 
 const MATRIX_CHARS = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@";
 const MATRIX_COLORS = [
-  "rgba(255, 76, 96, 0.44)",
-  "rgba(226, 43, 66, 0.4)",
-  "rgba(182, 23, 42, 0.36)",
-  "rgba(140, 15, 31, 0.34)"
+  "rgba(255, 96, 116, 0.9)",
+  "rgba(255, 72, 94, 0.82)",
+  "rgba(236, 50, 73, 0.74)",
+  "rgba(208, 36, 57, 0.66)"
 ];
 
 export function MatrixRain() {
@@ -29,7 +29,7 @@ export function MatrixRain() {
       return;
     }
 
-    const fontSize = 10;
+    const fontSize = 13;
     const frameIntervalMs = 50;
 
     let width = 0;
@@ -62,7 +62,7 @@ export function MatrixRain() {
       lastDrawTime = timestamp;
 
       const isDarkTheme = document.documentElement.classList.contains("dark");
-      context.fillStyle = isDarkTheme ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.08)";
+      context.fillStyle = isDarkTheme ? "rgba(0, 0, 0, 0.06)" : "rgba(255, 255, 255, 0.05)";
       context.fillRect(0, 0, width, height);
 
       context.font = `${fontSize}px Menlo, Monaco, Consolas, monospace`;
@@ -105,7 +105,7 @@ export function MatrixRain() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 opacity-[0.28]"
+      className="pointer-events-none fixed inset-0 z-0 opacity-[0.46]"
       aria-hidden
     />
   );
