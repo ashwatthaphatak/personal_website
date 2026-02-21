@@ -5,9 +5,10 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
+  direction?: "up" | "left" | "right";
 };
 
-export function ScrollReveal({ children, className = "" }: ScrollRevealProps) {
+export function ScrollReveal({ children, className = "", direction = "up" }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [revealed, setRevealed] = useState(false);
 
@@ -40,6 +41,7 @@ export function ScrollReveal({ children, className = "" }: ScrollRevealProps) {
   return (
     <div
       ref={ref}
+      data-reveal-direction={direction}
       className={`reveal-block ${revealed ? "reveal-block--in" : "reveal-block--pending"} ${className}`}
     >
       {children}

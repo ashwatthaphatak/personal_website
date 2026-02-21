@@ -39,11 +39,11 @@ My interests sit across operating systems, distributed systems, computer network
     calendly: "https://calendly.com/ashwatthap/30min",
     resumes: [
       {
-        label: "Download Distributed Resume",
+        label: "Distributed Resume",
         href: "/resume/Ashwattha_Phatak_Distributed.pdf"
       },
       {
-        label: "Download ML/AI Resume",
+        label: "ML/AI Resume",
         href: "/resume/Ashwattha_Phatak_MLAI.pdf"
       }
     ]

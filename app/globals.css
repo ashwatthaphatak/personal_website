@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --header-offset: 6.5rem;
+  --font-base: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --bg: #ffffff;
   --surface: #ffffff;
   --surface-strong: #f8f2f3;
@@ -36,6 +38,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -69,10 +72,10 @@ body {
   background-color: var(--bg);
   background-attachment: fixed;
   color: var(--text);
-  font-size: 18px;
+  font-size: 1rem;
   line-height: 1.65;
   font-weight: 400;
-  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font-base);
 }
 
 .dark body {
@@ -99,16 +102,31 @@ body {
 }
 
 .section-shell {
-  scroll-margin-top: 8rem;
-  padding-block: 1rem;
+  scroll-margin-top: var(--header-offset);
+  padding-block: 0;
 }
 
 .section-card {
-  border: 1px solid var(--border);
-  border-radius: 1.5rem;
-  background: var(--surface);
-  box-shadow: var(--panel-shadow);
-  padding: 1.25rem;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.hero-stage {
+  padding-block: 1rem;
+}
+
+.hero-stage__inner {
+  width: 100%;
+}
+
+.hero-display {
+  font-family: var(--font-base);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .section-kicker {
@@ -168,13 +186,13 @@ body {
 
 @media (min-width: 640px) {
   .section-card {
-    padding: 1.5rem;
+    padding: 0;
   }
 }
 
 code,
 .font-mono {
-  font-family: Menlo, Monaco, Consolas, "SFMono-Regular", "Courier New", monospace;
+  font-family: var(--font-base);
 }
 
 .reveal-block {
@@ -183,9 +201,22 @@ code,
 
 .reveal-block--pending {
   opacity: 0;
-  transform: translateY(30px) scale(0.985) rotateX(6deg);
-  transform-origin: 50% 100%;
   filter: blur(2px);
+}
+
+.reveal-block--pending[data-reveal-direction="up"] {
+  transform: translateY(28px) scale(0.985);
+  transform-origin: 50% 100%;
+}
+
+.reveal-block--pending[data-reveal-direction="left"] {
+  transform: translateX(-42px) scale(0.988);
+  transform-origin: 0 50%;
+}
+
+.reveal-block--pending[data-reveal-direction="right"] {
+  transform: translateX(42px) scale(0.988);
+  transform-origin: 100% 50%;
 }
 
 .reveal-block--in {

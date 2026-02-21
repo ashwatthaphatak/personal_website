@@ -30,6 +30,7 @@ cp .env.example .env.local
 Current variables:
 - `NEXT_TELEMETRY_DISABLED`
 - `NEXT_PUBLIC_SITE_URL`
+- `GITHUB_TOKEN` (optional, enables richer GitHub GraphQL data)
 
 ## Docker
 ### Dev container (hot reload)
@@ -69,11 +70,11 @@ public/
     Ashwattha_Phatak_MLAI.pdf
 ```
 
-## Profile Photo + GitHub Activity
-- Hero photo source lives in `content/profile.ts` as `profile.photo.src`.
-- Default path is `/images/linkedin-profile.jpg`; place your LinkedIn headshot at `public/images/linkedin-profile.jpg`.
-- If the local image is missing, the site falls back to your GitHub avatar.
-- GitHub activity chart is rendered from `ghchart.rshah.org` using `profile.githubUsername`.
+## GitHub Activity
+- GitHub activity is now loaded via GitHub GraphQL (live data), not a static image chart.
+- The UI supports year-by-year switching.
+- Data is revalidated daily on the server.
+- If `GITHUB_TOKEN` is not set, the site automatically falls back to GitHub public contributions SVG data.
 
 ## Content Updates
 All portfolio content is centralized in `content/`.

@@ -1,8 +1,8 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { BootSequenceProvider } from "@/components/boot-sequence";
 import { GitHubActivitySection } from "@/components/github-activity-section";
-import { ProfileImage } from "@/components/profile-image";
 import { ProjectsSection } from "@/components/projects-section";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
@@ -24,144 +24,97 @@ export default function HomePage() {
         <ScrollProgress />
         <SiteHeader sections={navSections} siteName={profile.name} />
 
-        <main className="mx-auto w-full max-w-7xl px-4 pb-20 pt-6 sm:px-6 sm:pt-8">
-          <section
-            id="hero"
-            className="scroll-mt-32 relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--card-shadow)] sm:p-8 lg:p-10"
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -right-24 -top-20 h-72 w-72 rounded-full bg-[var(--accent-soft)] opacity-75 blur-3xl"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -bottom-24 left-12 h-60 w-60 rounded-full bg-[var(--surface-strong)] opacity-85 blur-3xl"
-            />
+        <main className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 pb-16 pt-4 sm:gap-4 sm:px-6 sm:pt-6">
+          <section id="hero" className="hero-stage scroll-mt-32">
+            <div className="hero-stage__inner">
+              <p className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+                Systems x AI Portfolio
+              </p>
+              <h1 className="hero-display mt-4 max-w-6xl text-[clamp(4rem,15vw,12rem)] leading-[0.84] text-[var(--text)]">
+                {profile.name}
+              </h1>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--muted)]">{profile.tagline}</p>
 
-            <div className="relative grid gap-8 lg:grid-cols-[1.35fr_0.95fr] lg:items-start">
-              <div className="space-y-5">
-                <p className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Systems x AI Portfolio
-                </p>
-                <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
-                  {profile.name}
-                </h1>
-                <p className="max-w-2xl text-lg leading-8 text-[var(--muted)]">{profile.tagline}</p>
-
-                <div className="flex flex-wrap gap-2 text-sm text-[var(--muted)]">
-                  <span className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5">
-                    {profile.location}
-                  </span>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex flex-wrap gap-2">
-                    {profile.rolesInterestedIn.map((role) => (
-                      <span
-                        key={role}
-                        className="rounded-md border border-[var(--accent)] bg-[var(--accent-soft)] px-2.5 py-1 text-xs tracking-[0.06em] text-[var(--text)]"
-                      >
-                        {role}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {profile.interests.slice(0, 6).map((interest) => (
-                      <span
-                        key={interest}
-                        className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-2.5 py-1 text-xs text-[var(--muted)]"
-                      >
-                        {interest}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="mt-5 flex flex-wrap gap-2 text-sm text-[var(--muted)]">
+                <span className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5">
+                  {profile.location}
+                </span>
               </div>
 
-              <aside className="interactive-card rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 shadow-[var(--panel-shadow)]">
-                <div className="flex flex-col items-start gap-4">
-                  <ProfileImage
-                    src={profile.photo.src}
-                    alt={profile.photo.alt}
-                    fallbackSrc={profile.photo.fallbackSrc}
-                    initials="AP"
-                    className="h-40 w-40 rounded-xl border border-[var(--border)] object-cover shadow-sm sm:h-44 sm:w-44"
-                  />
+              <div className="mt-6 flex flex-wrap gap-2">
+                {profile.rolesInterestedIn.slice(0, 4).map((role) => (
+                  <span
+                    key={role}
+                    className="rounded-md border border-[var(--accent)] bg-[var(--accent-soft)] px-2.5 py-1 text-xs tracking-[0.06em] text-[var(--text)]"
+                  >
+                    {role}
+                  </span>
+                ))}
+              </div>
 
-                  <div>
-                    <p className="text-base font-semibold text-[var(--text)]">{profile.name}</p>
-                    <p className="mt-1 text-sm text-[var(--muted)]">{profile.location}</p>
-                  </div>
+              <div className="mt-8 flex flex-wrap items-center gap-2">
+                <SocialIconLink
+                  href={`mailto:${profile.email}`}
+                  label="Gmail"
+                  icon={<MailIcon />}
+                  className="h-10 w-10"
+                />
+                <SocialIconLink
+                  href={profile.links.linkedin}
+                  label="LinkedIn"
+                  icon={<LinkedInIcon />}
+                  className="h-10 w-10"
+                />
+                <SocialIconLink
+                  href={profile.links.github}
+                  label="GitHub"
+                  icon={<GitHubIcon />}
+                  className="h-10 w-10"
+                />
+                <SocialIconLink
+                  href={profile.links.calendly}
+                  label="Calendly"
+                  icon={<CalendlyIcon />}
+                  className="h-10 w-10"
+                />
 
-                  <div className="flex w-full flex-wrap items-center gap-2">
-                    <SocialIconLink
-                      href={`mailto:${profile.email}`}
-                      label="Gmail"
-                      icon={<MailIcon />}
-                      className="h-10 w-10"
-                    />
-                    <SocialIconLink
-                      href={profile.links.linkedin}
-                      label="LinkedIn"
-                      icon={<LinkedInIcon />}
-                      className="h-10 w-10"
-                    />
-                    <SocialIconLink
-                      href={profile.links.github}
-                      label="GitHub"
-                      icon={<GitHubIcon />}
-                      className="h-10 w-10"
-                    />
-                    <SocialIconLink
-                      href={profile.links.calendly}
-                      label="Calendly"
-                      icon={<CalendlyIcon />}
-                      className="h-10 w-10"
-                    />
-                    <details className="group relative">
-                      <summary className="list-none cursor-pointer rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] transition hover:border-[var(--accent)] [&::-webkit-details-marker]:hidden">
-                        Resume
-                      </summary>
-                      <div className="absolute left-0 top-12 z-20 grid min-w-[13rem] gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 shadow-[var(--panel-shadow)]">
-                        {profile.links.resumes.map((resume) => (
-                          <a
-                            key={resume.href}
-                            href={resume.href}
-                            download
-                            className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-2.5 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
-                          >
-                            {resume.label}
-                          </a>
-                        ))}
-                      </div>
-                    </details>
-                  </div>
-                </div>
-              </aside>
+                <Link
+                  href="/resume"
+                  className="interactive-card inline-flex items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] shadow-[var(--button-shadow)] transition hover:border-[var(--text)]"
+                >
+                  Resume
+                </Link>
+              </div>
+
+              <a
+                href="#about"
+                className="mt-6 inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs uppercase tracking-[0.12em] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
+              >
+                Scroll to About
+                <span aria-hidden>↓</span>
+              </a>
             </div>
           </section>
 
-          <ScrollReveal>
+          <ScrollReveal direction="left">
             <section id="about" className="section-shell">
               <div className="section-card">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">About Me</h2>
                   <span className="section-kicker">01</span>
                 </div>
-                <div className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--surface-strong)] p-4 sm:p-5">
-                  <div className="space-y-4">
-                    {aboutParagraphs.map((paragraph) => (
-                      <p key={paragraph} className="text-base leading-8 text-[var(--muted)] [text-align:justify]">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
+                <div className="mt-5 space-y-4">
+                  {aboutParagraphs.map((paragraph) => (
+                    <p key={paragraph} className="text-base leading-8 text-[var(--muted)] [text-align:justify]">
+                      {paragraph}
+                    </p>
+                  ))}
                 </div>
               </div>
             </section>
           </ScrollReveal>
 
-          <ScrollReveal>
+          <ScrollReveal direction="right">
             <section id="experience" className="section-shell">
               <div className="section-card">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -199,18 +152,17 @@ export default function HomePage() {
             </section>
           </ScrollReveal>
 
-          <ScrollReveal>
+          <ScrollReveal direction="left">
             <ProjectsSection projects={projects} />
           </ScrollReveal>
 
-          <ScrollReveal>
+          <ScrollReveal direction="right">
             <SkillsSection groups={skillGroups} />
           </ScrollReveal>
 
-          <ScrollReveal>
+          <ScrollReveal direction="left">
             <GitHubActivitySection username={profile.githubUsername} profileUrl={profile.links.github} />
           </ScrollReveal>
-
         </main>
       </TrackProvider>
     </BootSequenceProvider>
