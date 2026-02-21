@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { useBootSequence } from "@/components/boot-sequence";
@@ -125,6 +126,12 @@ export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
             })}
           </nav>
           <div className="flex items-center gap-2">
+            <Link
+              href="/blog"
+              className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs uppercase tracking-[0.08em] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)] sm:text-sm"
+            >
+              Blog
+            </Link>
             <button
               type="button"
               onClick={reboot}

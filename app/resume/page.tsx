@@ -23,6 +23,10 @@ export default function ResumeHubPage() {
             <p className="mt-2 text-sm text-[var(--muted)]">
               Both resume variants are available below. Open any one and use Print.
             </p>
+            <p className="mt-2 text-sm leading-7 text-[var(--text)]">
+              If you&apos;re hiring for Distributed/Systems, use Resume A (Distributed Resume); if
+              Autonomy/Perception, use Resume B (ML/AI Resume).
+            </p>
           </div>
           <Link
             href="/#hero"

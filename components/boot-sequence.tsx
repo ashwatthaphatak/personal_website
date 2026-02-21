@@ -4,9 +4,9 @@ import { createContext, useContext, useEffect, useMemo, useRef, useState, type R
 
 import { MatrixRain } from "@/components/matrix-rain";
 
-const DEFAULT_BOOT_DURATION_MS = 3000;
+const DEFAULT_BOOT_DURATION_MS = 2000;
 
-type BootPhase = "boot" | "gate" | "ready";
+type BootPhase = "boot" | "ready";
 
 const BIOS_LINES = [
   "UEFI Firmware Utility v2.31",
@@ -16,13 +16,15 @@ const BIOS_LINES = [
   "NVMe Storage: 1 Device Detected",
   "USB Keyboard + Mouse Initialized",
   "ACPI Tables Loaded... OK",
-  "Bootloader: /efi/boot/ashwattha.efi"
-];
-
-const GATE_STATUS_MESSAGES = [
-  "Decrypting terminal glyph cache...",
-  "Negotiating secure visitor handshake...",
-  "Spinning up portfolio runtime..."
+  "Bootloader: /efi/boot/ashwattha.efi",
+  "Kernel Image Verified (sha256)... OK",
+  "Initramfs Unpacked... OK",
+  "Systemd Units: 143 Loaded",
+  "Network Stack: eth0 up, wlan0 up",
+  "Container Runtime Socket Active",
+  "Edge Diagnostics Service Active",
+  "Telemetry Buffer Initialization... OK",
+  "Portfolio Runtime Entering Interactive Mode"
 ];
 
 type BootSequenceContextValue = {
@@ -50,7 +52,7 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
     }
 
     timeoutRef.current = window.setTimeout(() => {
-      setPhase("gate");
+      setPhase("ready");
     }, bootDurationMs);
 
     return () => {
@@ -65,14 +67,10 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
     setBootCycle((current) => current + 1);
   };
 
-  const enterPortfolio = () => {
-    setPhase("ready");
-  };
-
   const value = useMemo(
     () => ({
       reboot,
-      isBooting: phase !== "ready"
+      isBooting: phase === "boot"
     }),
     [phase]
   );
@@ -82,7 +80,6 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
       <MatrixRain />
       <div className="relative z-10">{children}</div>
       <BiosOverlay visible={phase === "boot"} bootCycle={bootCycle} bootDurationMs={bootDurationMs} />
-      <EnterOverlay visible={phase === "gate"} onEnter={enterPortfolio} />
     </BootSequenceContext.Provider>
   );
 }
@@ -153,80 +150,6 @@ function BiosOverlay({ visible, bootCycle, bootDurationMs }: BiosOverlayProps) {
           />
         </div>
         <p className="mt-3 text-xs text-white/80">Press F2 for Setup, ESC for Boot Menu</p>
-      </div>
-    </div>
-  );
-}
-
-type EnterOverlayProps = {
-  visible: boolean;
-  onEnter: () => void;
-};
-
-function EnterOverlay({ visible, onEnter }: EnterOverlayProps) {
-  const [statusIndex, setStatusIndex] = useState(0);
-
-  useEffect(() => {
-    if (!visible) {
-      return;
-    }
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        onEnter();
-      }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [onEnter, visible]);
-
-  useEffect(() => {
-    if (!visible) {
-      return;
-    }
-
-    setStatusIndex(0);
-    const interval = window.setInterval(() => {
-      setStatusIndex((current) => (current + 1) % GATE_STATUS_MESSAGES.length);
-    }, 1200);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, [visible]);
-
-  return (
-    <div
-      className={`fixed inset-0 z-[120] flex items-center justify-center bg-black/55 px-4 backdrop-blur-md transition-opacity duration-300 ${
-        visible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-      }`}
-      aria-hidden={!visible}
-    >
-      <div className="w-full max-w-md rounded-2xl border border-white/30 bg-white/10 p-6 text-white shadow-2xl backdrop-blur-xl">
-        <p className="text-xs uppercase tracking-[0.14em] text-white/80">Secure Terminal Access</p>
-        <h2 className="mt-2 text-2xl font-semibold">View Portfolio</h2>
-        <p className="mt-2 text-sm text-white/85">Press Enter or use the button below to continue.</p>
-
-        <div className="mt-4 rounded-lg border border-white/35 bg-[#16090c]/74 p-3 font-mono text-xs text-[#ff97a4]">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-[#ff3047]" />
-            <span>{GATE_STATUS_MESSAGES[statusIndex]}</span>
-          </div>
-          <p className="mt-2 text-[#ffc0ca]">visitor@portfolio:~$ ./launch --mode=interactive</p>
-        </div>
-
-        <button
-          type="button"
-          onClick={onEnter}
-          className="mt-5 inline-flex rounded-lg border border-white/70 bg-white/15 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/25"
-        >
-          Enter Portfolio
-        </button>
       </div>
     </div>
   );

@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-import { useTrackContext } from "@/components/track-context";
 import type { Project } from "@/content/types";
 
 type ProjectsSectionProps = {
@@ -95,13 +94,8 @@ function parseTimelineRange(timeline: string) {
 }
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
-  const { activeTrack } = useTrackContext();
   const [search, setSearch] = useState("");
-  const [selectedTags, setSelectedTags] = useState<string[]>(activeTrack.featuredProjectTags);
-
-  useEffect(() => {
-    setSelectedTags(activeTrack.featuredProjectTags);
-  }, [activeTrack.id, activeTrack.featuredProjectTags]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -113,7 +107,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
 
   const query = search.trim().toLowerCase();
 
-  const visibleProjects = useMemo(() => {
+  const filteredProjects = useMemo(() => {
     const hasQuery = query.length > 0;
 
     return projects
@@ -121,9 +115,11 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         const bag = [
           project.title,
           project.summary,
+          project.proof,
           ...project.techStack,
           ...project.tags,
-          ...project.bullets
+          ...project.bullets,
+          ...project.metrics
         ]
           .join(" ")
           .toLowerCase();
@@ -131,16 +127,10 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         const matchesQuery = !hasQuery || bag.includes(query);
         const matchingSelectedTagCount = selectedTags.filter((tag) => project.tags.includes(tag)).length;
         const matchesSelectedTags = selectedTags.length === 0 || matchingSelectedTagCount > 0;
-        const matchingTrackTagCount = activeTrack.featuredProjectTags.filter((tag) =>
-          project.tags.includes(tag)
-        ).length;
-
-        const score = matchingTrackTagCount * 4 + matchingSelectedTagCount * 3 + (matchesQuery ? 1 : 0);
         const timeline = parseTimelineRange(project.timeline);
 
         return {
           project,
-          score,
           timelineEnd: timeline.end,
           timelineStart: timeline.start,
           matchesQuery,
@@ -152,11 +142,12 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         (a, b) =>
           b.timelineEnd - a.timelineEnd ||
           b.timelineStart - a.timelineStart ||
-          b.score - a.score ||
           a.project.title.localeCompare(b.project.title)
       )
       .map((entry) => entry.project);
-  }, [activeTrack.featuredProjectTags, projects, query, selectedTags]);
+  }, [projects, query, selectedTags]);
+
+  const displayedProjects = filteredProjects;
 
   const toggleTag = (tag: string) => {
     setSelectedTags((current) => {
@@ -174,24 +165,24 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Projects</h2>
           <span className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-[var(--muted)]">
-            {visibleProjects.length} shown
+            {displayedProjects.length} project{displayedProjects.length === 1 ? "" : "s"}
           </span>
         </div>
 
-        <div className="mt-5 grid gap-3">
-          <label htmlFor="project-search" className="text-xs font-medium uppercase tracking-[0.14em] text-[var(--muted)]">
+        <div className="mt-4 grid gap-2">
+          <label htmlFor="project-search" className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
             Search projects
           </label>
           <input
             id="project-search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Search title, stack, tags, or keywords"
-            className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--accent)]"
+            placeholder="Search title, proof, stack, or tags"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-2 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--accent)]"
           />
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setSelectedTags([])}
@@ -223,35 +214,36 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           })}
         </div>
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          {visibleProjects.map((project) => (
+        <div className="mt-5 grid gap-4 lg:grid-cols-2">
+          {displayedProjects.map((project) => (
             <article
               key={project.id}
-              className="interactive-card group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 pl-6 transition hover:border-[var(--accent)]"
+              className="relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-4 transition"
             >
-              <span className="absolute inset-y-0 left-0 w-1 bg-[var(--accent)]" />
-
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold text-[var(--text)]">{project.title}</h3>
-                <span className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
-                  {project.timeline}
-                </span>
+                <span className="text-xs uppercase tracking-[0.08em] text-[var(--muted)]">{project.timeline}</span>
               </div>
 
               <p className="mt-2 text-sm text-[var(--muted)]">{project.summary}</p>
+
+              <p className="mt-3 text-sm leading-7 text-[var(--text)]">
+                <span className="text-xs uppercase tracking-[0.1em] text-[var(--muted)]">Technical focus:</span>{" "}
+                {project.proof}
+              </p>
+
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
+                {project.metrics.slice(0, 2).map((metric) => (
+                  <li key={`${project.id}-${metric}`}>{metric}</li>
+                ))}
+              </ul>
 
               <p className="mt-3 text-xs text-[var(--muted)]">
                 <span className="font-semibold uppercase tracking-[0.08em] text-[var(--text)]">Stack:</span>{" "}
                 {project.techStack.join(", ")}
               </p>
 
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-                {project.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
@@ -262,19 +254,19 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 ))}
               </div>
 
-              {project.links && project.links.filter((link) => link.href.trim() !== "#").length > 0 ? (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.links
-                    .filter((link) => link.href.trim() !== "#")
-                    .map((link) => (
-                      <a
-                        key={`${project.id}-${link.label}`}
-                        href={link.href}
-                        className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
+              {project.links.length > 0 ? (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {project.links.map((link) => (
+                    <a
+                      key={`${project.id}-${link.label}`}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
                 </div>
               ) : null}
             </article>

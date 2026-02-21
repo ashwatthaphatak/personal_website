@@ -1,88 +1,35 @@
-import type { SkillGroup } from "@/content/types";
+import type { SkillColumn } from "@/content/types";
 
-export const skillGroups: SkillGroup[] = [
+export const skillColumns: SkillColumn[] = [
   {
-    id: "languages",
-    title: "Languages",
-    items: ["C", "C++", "Python", "Go", "Bash", "TypeScript"]
-  },
-  {
-    id: "systems-os",
-    title: "Systems/OS",
-    items: [
+    id: "systems-distributed",
+    title: "Systems / Distributed",
+    strongLabel: "Built with",
+    strong: [
+      "C/C++",
       "Linux",
-      "Embedded Linux",
-      "RTOS",
-      "Kernel Internals",
-      "Device Drivers",
-      "Filesystems",
-      "Real-Time Scheduling",
-      "QEMU",
-      "GDB"
-    ]
+      "Sockets",
+      "Concurrency Control",
+      "Filesystem/Journaling",
+      "Kernel + Paging (Xinu)"
+    ],
+    familiarLabel: "Studied / Familiar",
+    familiar: ["Consensus/Quorums", "Consistent Hashing", "Vector Clocks", "Failure Detectors"]
   },
   {
-    id: "distributed-systems",
-    title: "Distributed Systems",
-    items: [
-      "Consistency Models",
-      "Leader Election",
-      "Consistent Hashing",
-      "Quorum Protocols",
-      "Vector Clocks",
-      "Socket Programming",
-      "Distributed Metadata Replication",
-      "Crash-Consistent Journaling",
-      "Concurrency Control"
-    ]
+    id: "autonomy-perception-ml",
+    title: "Autonomy / Perception / ML",
+    strongLabel: "Built with",
+    strong: ["ROS2", "Gazebo", "Nav2", "OpenPCDet", "PyTorch", "CARLA"],
+    familiarLabel: "Studied / Familiar",
+    familiar: ["Sensor Fusion", "SLAM", "Kalman/Particle Filters", "RL (SARSA, Q-Learning)"]
   },
   {
-    id: "robotics",
-    title: "Robotics",
-    items: [
-      "ROS",
-      "ROS2",
-      "Gazebo",
-      "RViz",
-      "Nav2",
-      "CARLA Simulator",
-      "SLAM",
-      "Localization",
-      "Path Planning",
-      "Sensor Fusion"
-    ]
-  },
-  {
-    id: "ml-perception",
-    title: "ML/Perception",
-    items: [
-      "PyTorch",
-      "TensorFlow",
-      "OpenCV",
-      "Open3D",
-      "PCL",
-      "OpenPCDet",
-      "LiDAR 3D Vision",
-      "Reinforcement Learning",
-      "Kalman/Particle Filters",
-      "CUDA",
-      "TensorRT"
-    ]
-  },
-  {
-    id: "tools-cloud-devops",
-    title: "Tools/Cloud/DevOps",
-    items: [
-      "Docker",
-      "Kubernetes",
-      "AWS",
-      "GCP",
-      "Git",
-      "CMake",
-      "Make",
-      "Flask",
-      "MongoDB",
-      "FAISS"
-    ]
+    id: "tools",
+    title: "Tools",
+    strongLabel: "Built with",
+    strong: ["Git", "Docker", "GDB", "QEMU", "CMake/Make", "Flask"],
+    familiarLabel: "Studied / Familiar",
+    familiar: ["Kubernetes", "AWS/GCP", "TensorRT", "Tauri"]
   }
 ];

@@ -8,163 +8,220 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
 import { SkillsSection } from "@/components/skills-section";
-import { TrackProvider } from "@/components/track-context";
 import { experience } from "@/content/experience";
 import { profile, navSections } from "@/content/profile";
 import { projects } from "@/content/projects";
-import { skillGroups } from "@/content/skills";
-import { tracks } from "@/content/tracks";
+import { skillColumns } from "@/content/skills";
 
 export default function HomePage() {
   const aboutParagraphs = profile.about.split("\n\n");
 
   return (
     <BootSequenceProvider>
-      <TrackProvider tracks={tracks} initialTrack="distributed-infra">
-        <ScrollProgress />
-        <SiteHeader sections={navSections} siteName={profile.name} />
+      <ScrollProgress />
+      <SiteHeader sections={navSections} siteName={profile.name} />
 
-        <main className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 pb-16 pt-4 sm:gap-4 sm:px-6 sm:pt-6">
-          <section id="hero" className="hero-stage scroll-mt-32">
-            <div className="hero-stage__inner">
-              <p className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                Systems x AI Portfolio
-              </p>
-              <h1 className="hero-display mt-4 max-w-6xl text-[clamp(4rem,15vw,12rem)] leading-[0.84] text-[var(--text)]">
-                {profile.name}
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--muted)]">{profile.tagline}</p>
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 pb-16 pt-4 sm:gap-4 sm:px-6 sm:pt-6">
+        <section id="hero" className="hero-stage scroll-mt-32">
+          <div className="hero-stage__inner">
+            <p className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+              New Grad Systems + Autonomy Engineer
+            </p>
+            <h1 className="hero-display mt-4 max-w-6xl text-[clamp(4rem,15vw,12rem)] leading-[0.84] text-[var(--text)]">
+              {profile.name}
+            </h1>
+            <p className="mt-5 max-w-4xl text-lg leading-8 text-[var(--muted)]">{profile.tagline}</p>
 
-              <div className="mt-5 flex flex-wrap gap-2 text-sm text-[var(--muted)]">
-                <span className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5">
-                  {profile.location}
+            <div className="mt-5 flex flex-wrap gap-2 text-sm text-[var(--muted)]">
+              <span className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1.5">
+                {profile.location}
+              </span>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {profile.rolesInterestedIn.slice(0, 4).map((role) => (
+                <span
+                  key={role}
+                  className="rounded-md border border-[var(--accent)] bg-[var(--accent-soft)] px-2.5 py-1 text-xs tracking-[0.06em] text-[var(--text)]"
+                >
+                  {role}
                 </span>
-              </div>
+              ))}
+            </div>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {profile.rolesInterestedIn.slice(0, 4).map((role) => (
-                  <span
-                    key={role}
-                    className="rounded-md border border-[var(--accent)] bg-[var(--accent-soft)] px-2.5 py-1 text-xs tracking-[0.06em] text-[var(--text)]"
-                  >
-                    {role}
-                  </span>
+            <div className="mt-8 flex flex-wrap items-center gap-2">
+              <SocialIconLink
+                href={`mailto:${profile.email}`}
+                label="Gmail"
+                icon={<MailIcon />}
+                className="h-10 w-10"
+              />
+              <SocialIconLink
+                href={profile.links.linkedin}
+                label="LinkedIn"
+                icon={<LinkedInIcon />}
+                className="h-10 w-10"
+              />
+              <SocialIconLink
+                href={profile.links.github}
+                label="GitHub"
+                icon={<GitHubIcon />}
+                className="h-10 w-10"
+              />
+              <SocialIconLink
+                href={profile.links.calendly}
+                label="Calendly"
+                icon={<CalendlyIcon />}
+                className="h-10 w-10"
+              />
+
+              <Link
+                href="/resume"
+                className="interactive-card inline-flex items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] shadow-[var(--button-shadow)] transition hover:border-[var(--text)]"
+              >
+                Resume
+              </Link>
+            </div>
+
+            <a
+              href="#fast-scan"
+              className="mt-6 inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs uppercase tracking-[0.12em] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
+            >
+              Recruiter Fast-Scan
+              <span aria-hidden>↓</span>
+            </a>
+          </div>
+        </section>
+
+        <ScrollReveal direction="right">
+          <section id="fast-scan" className="section-shell">
+            <div className="section-card">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Recruiter Fast-Scan</h2>
+                <span className="section-kicker">01</span>
+              </div>
+              <p className="attention-copy mt-4 text-base font-semibold leading-8">
+                {profile.fastScan.seeking}
+              </p>
+              <ul className="attention-copy mt-4 list-disc space-y-2 pl-5 text-sm font-medium leading-7">
+                {profile.fastScan.proofPoints.map((point) => (
+                  <li key={point}>{point}</li>
                 ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center gap-2">
-                <SocialIconLink
-                  href={`mailto:${profile.email}`}
-                  label="Gmail"
-                  icon={<MailIcon />}
-                  className="h-10 w-10"
-                />
-                <SocialIconLink
-                  href={profile.links.linkedin}
-                  label="LinkedIn"
-                  icon={<LinkedInIcon />}
-                  className="h-10 w-10"
-                />
-                <SocialIconLink
-                  href={profile.links.github}
-                  label="GitHub"
-                  icon={<GitHubIcon />}
-                  className="h-10 w-10"
-                />
-                <SocialIconLink
-                  href={profile.links.calendly}
-                  label="Calendly"
-                  icon={<CalendlyIcon />}
-                  className="h-10 w-10"
-                />
-
+              </ul>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs uppercase tracking-[0.1em]">
+                <Link
+                  href="/blog"
+                  className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-2 text-[var(--text)] transition hover:border-[var(--accent)]"
+                >
+                  Blog
+                </Link>
                 <Link
                   href="/resume"
-                  className="interactive-card inline-flex items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] shadow-[var(--button-shadow)] transition hover:border-[var(--text)]"
+                  className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-2 text-[var(--text)] transition hover:border-[var(--accent)]"
                 >
                   Resume
                 </Link>
+                <a
+                  href={profile.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-2 text-[var(--text)] transition hover:border-[var(--accent)]"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={profile.links.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-md border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-2 text-[var(--text)] transition hover:border-[var(--accent)]"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="rounded-md border border-[var(--accent)] bg-[var(--accent-soft)] px-3 py-2 font-semibold text-[var(--text)] transition hover:border-[var(--text)]"
+                >
+                  Email: {profile.email}
+                </a>
               </div>
-
-              <a
-                href="#about"
-                className="mt-6 inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs uppercase tracking-[0.12em] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
-              >
-                Scroll to About
-                <span aria-hidden>↓</span>
-              </a>
+              <p className="attention-copy mt-4 text-sm font-semibold leading-7">
+                {profile.fastScan.cta}
+              </p>
             </div>
           </section>
+        </ScrollReveal>
 
-          <ScrollReveal direction="left">
-            <section id="about" className="section-shell">
-              <div className="section-card">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">About Me</h2>
-                  <span className="section-kicker">01</span>
-                </div>
-                <div className="mt-5 space-y-4">
-                  {aboutParagraphs.map((paragraph) => (
-                    <p key={paragraph} className="text-base leading-8 text-[var(--muted)] [text-align:justify]">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
+        <ScrollReveal direction="left">
+          <section id="about" className="section-shell">
+            <div className="section-card">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">About Me</h2>
+                <span className="section-kicker">02</span>
               </div>
-            </section>
-          </ScrollReveal>
+              <div className="mt-5 space-y-4">
+                {aboutParagraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="attention-copy text-base font-medium leading-8 [text-align:justify]"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
 
-          <ScrollReveal direction="right">
-            <section id="experience" className="section-shell">
-              <div className="section-card">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Experience</h2>
-                  <span className="section-kicker">02</span>
-                </div>
+        <ScrollReveal direction="right">
+          <section id="experience" className="section-shell">
+            <div className="section-card">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Experience</h2>
+                <span className="section-kicker">03</span>
+              </div>
 
-                <div className="mt-6 border-l border-dashed border-[var(--border)] pl-6">
-                  {experience.map((role) => (
-                    <article
-                      key={role.id}
-                      className="interactive-card relative mb-5 rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 last:mb-0"
-                    >
-                      <span className="timeline-node absolute -left-[1.9rem] top-7 h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--bg)]" />
+              <div className="mt-5 border-l border-dashed border-[var(--border)] pl-6">
+                {experience.map((role) => (
+                  <article
+                    key={role.id}
+                    className="interactive-card relative mb-4 rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-4 last:mb-0"
+                  >
+                    <span className="timeline-node absolute -left-[1.9rem] top-7 h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--bg)]" />
 
-                      <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-                        <div>
-                          <h3 className="text-lg font-semibold text-[var(--text)]">
-                            {role.organization} - {role.title}
-                          </h3>
-                          <p className="text-sm text-[var(--muted)]">{role.location}</p>
-                        </div>
-                        <p className="text-sm font-medium text-[var(--muted)]">{role.dates}</p>
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-[var(--text)]">
+                          {role.organization} - {role.title}
+                        </h3>
+                        <p className="text-sm text-[var(--muted)]">{role.location}</p>
                       </div>
+                      <p className="text-sm font-medium text-[var(--muted)]">{role.dates}</p>
+                    </div>
 
-                      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-[var(--muted)]">
-                        {role.bullets.map((bullet) => (
-                          <li key={bullet}>{bullet}</li>
-                        ))}
-                      </ul>
-                    </article>
-                  ))}
-                </div>
+                    <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-[var(--muted)]">
+                      {role.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
               </div>
-            </section>
-          </ScrollReveal>
+            </div>
+          </section>
+        </ScrollReveal>
 
-          <ScrollReveal direction="left">
-            <ProjectsSection projects={projects} />
-          </ScrollReveal>
+        <ScrollReveal direction="left">
+          <ProjectsSection projects={projects} />
+        </ScrollReveal>
 
-          <ScrollReveal direction="right">
-            <SkillsSection groups={skillGroups} />
-          </ScrollReveal>
+        <ScrollReveal direction="left">
+          <SkillsSection columns={skillColumns} />
+        </ScrollReveal>
 
-          <ScrollReveal direction="left">
-            <GitHubActivitySection username={profile.githubUsername} profileUrl={profile.links.github} />
-          </ScrollReveal>
-        </main>
-      </TrackProvider>
+        <ScrollReveal direction="right">
+          <GitHubActivitySection username={profile.githubUsername} profileUrl={profile.links.github} />
+        </ScrollReveal>
+      </main>
     </BootSequenceProvider>
   );
 }

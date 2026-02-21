@@ -21,6 +21,11 @@ export type Profile = {
   githubUsername: string;
   tagline: string;
   about: string;
+  fastScan: {
+    seeking: string;
+    proofPoints: string[];
+    cta: string;
+  };
   interests: string[];
   rolesInterestedIn: string[];
   photo: {
@@ -63,11 +68,30 @@ export type Project = {
   id: string;
   title: string;
   summary: string;
+  proof: string;
   timeline: string;
   techStack: string[];
+  metrics: string[];
   bullets: string[];
   tags: string[];
-  links?: ProjectLink[];
+  links: ProjectLink[];
+};
+
+export type SkillColumn = {
+  id: string;
+  title: string;
+  strongLabel: string;
+  strong: string[];
+  familiarLabel: string;
+  familiar: string[];
+};
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  summary: string;
+  publishedAt: string;
+  content: string[];
 };
 
 export type TrackDefinition = {

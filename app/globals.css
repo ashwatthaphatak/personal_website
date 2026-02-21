@@ -141,6 +141,14 @@ body {
   padding: 0.35rem 0.65rem;
 }
 
+.attention-copy {
+  color: #0a0a0a;
+}
+
+.dark .attention-copy {
+  color: #ffffff;
+}
+
 .scroll-progress {
   pointer-events: none;
   position: fixed;

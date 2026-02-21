@@ -7,10 +7,20 @@ export const profile: Profile = {
   phone: "+1 919-971-3500",
   githubUsername: "ashwatthaphatak",
   tagline:
-    "Systems engineer passionate about building reliable distributed infrastructure and robotics perception stacks.",
-  about: `Richard Feynman had a habit of puncturing the genius myth. He once said, “I was an ordinary person who studied hard. There’s no miracle people.” That line has shaped how I approach engineering: start from first principles, stay rigorous, and earn understanding through consistent work. I’m not interested in sounding clever; I’m interested in being correct. If I can’t explain something plainly, I don’t count it as understanding yet—and I like work where the feedback is honest, where systems either hold up under stress or expose exactly what you failed to reason about.
+    "New Grad (May 2026) passionate about building distributed systems and autonomy/perception technology for the future of computing and robotics.",
+  about: `Richard Feynman had a habit of puncturing the genius myth. He once said, “I was an ordinary person who studied hard. There’s no miracle people.” That line has shaped how I approach engineering at the start of my career: first principles first, rigor over shortcuts, and understanding earned by building and pressure-testing real systems.
 
-My interests sit across operating systems, distributed systems, computer networks, and robotics/perception, and I treat them as one connected discipline around concurrency, uncertainty, and reliability under real constraints. Long term, I want to build large-scale systems with real-world impact: platforms that stay reliable under pressure, serve users at scale, and strengthen the technical foundations future systems depend on—not as a vague idea of “impact,” but as engineering that measurably improves what people can rely on, now and later.`,
+My work sits across operating systems, distributed systems, computer networks, and robotics/perception, and I treat them as one discipline around concurrency, uncertainty, and reliability under constraints. I build for correctness and performance under concurrency and failure, and for autonomy/perception pipelines that keep working when compute, latency, and sensing are all constrained.`,
+  fastScan: {
+    seeking:
+      "New Grad (May 2026) roles: Systems Software, Distributed Systems/Infrastructure, Autonomous Systems, and ML Systems.",
+    proofPoints: [
+      "Systems + infrastructure track: C/C++, Linux systems programming, kernel scheduling and demand paging (Xinu), filesystem internals (copy-on-write snapshots, journaling, crash recovery), sockets/concurrency control, distributed coordination, and reliability-oriented debugging under failure.",
+      "Autonomy + ML track: ROS2/Nav2/Gazebo/CARLA pipelines, OpenPCDet + PointPillars optimization, Kalman/Particle filtering, RL policy evaluation (Q-learning/SARSA), and end-to-end perception-to-control validation under constrained compute and noisy sensing."
+    ],
+    cta:
+      "If you’re hiring for systems/distributed or autonomy/ML systems roles, email me at ashwatthap@gmail.com."
+  },
   interests: [
     "Systems Software",
     "Distributed Systems",
@@ -52,6 +62,7 @@ My interests sit across operating systems, distributed systems, computer network
 
 export const navSections: NavSection[] = [
   { id: "hero", label: "Hero" },
+  { id: "fast-scan", label: "Fast Scan" },
   { id: "about", label: "About Me" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },

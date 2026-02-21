@@ -8,11 +8,11 @@ export const experience: ExperienceRole[] = [
     dates: "May 2025 - Present",
     location: "Raleigh, NC",
     bullets: [
-      "Built a one-touch commissioning workflow for Jetson AGX Orin devices, Wi-Fi modems, and managed switches, enabling repeatable field deployment across edge systems.",
-      "Implemented static DHCP assignment and multi-switch networking logic for deterministic IP allocation across camera, sensor, and GPU nodes.",
-      "Designed OTA update infrastructure for centralized, touchless rollout of system and application updates to distributed embedded platforms.",
-      "Implemented a real-time diagnostics API aggregating GPS, camera connectivity, disk, network, and data collection health metrics.",
-      "Refactored ROS1 communication into a lean IPC-based middleware layer, improving throughput and reliability for on-device perception pipelines."
+      "Built a one-touch commissioning workflow for Jetson AGX Orin systems, modems, and switches to reduce field bring-up time per unit.",
+      "Implemented deterministic multi-switch networking and static DHCP allocation across camera, sensor, and GPU nodes to reduce deployment misconfiguration risk.",
+      "Shipped OTA update infrastructure for distributed embedded platforms, enabling touchless rollout across field devices.",
+      "Implemented real-time diagnostics APIs for GPS, camera health, disk, network, and data collection to improve field triage and remote debugging.",
+      "Refactored ROS1 communication into an IPC-based middleware path, improving on-device perception throughput consistency with fewer dropped frames."
     ]
   },
   {
@@ -22,23 +22,23 @@ export const experience: ExperienceRole[] = [
     dates: "Jan 2025 - May 2025",
     location: "Raleigh, NC",
     bullets: [
-      "Extended OpenPCDet to support compressed LiDAR range-image representations (PBEA) for 3D detection experimentation.",
-      "Benchmarked PointPillars and PV-RCNN on KITTI across multiple range-image resolutions, measuring latency, recall, and average precision.",
-      "Built modular evaluation pipelines to quantify resolution vs. runtime vs. detection-fidelity trade-offs.",
-      "Analyzed inference timing variability to derive practical efficiency recommendations for real-time autonomy systems."
+      "Extended OpenPCDet to support compressed LiDAR range-image representations (PBEA), enabling controlled reconstruction/latency studies for 3D detection.",
+      "Benchmarked PointPillars and PV-RCNN on KITTI across multiple input resolutions, quantifying latency vs AP/recall trade-offs for real-time use.",
+      "Built modular evaluation pipelines to compare resolution, runtime, and fidelity, shortening experiment turnaround and improving repeatability.",
+      "Produced deployment-oriented recommendations for autonomy workloads based on timing variance and detector stability under constrained compute."
     ]
   },
   {
     id: "state-street-full-time",
     organization: "State Street",
-    title: "Site-Developability Engineer",
+    title: "Site Reliability Engineer",
     dates: "Jul 2023 - Jul 2024",
     location: "Bangalore, India",
     bullets: [
-      "Supported hedge-ledger and financial platforms through incident response and production change workflows to improve service stability.",
-      "Coordinated product owners and core engineering teams to reduce operational risk during releases and incident recovery windows.",
-      "Improved production deployability and operational readiness by tightening release checks and runbook-driven recovery workflows.",
-      "Automated operational reporting and reliability visibility workflows for day-to-day SRE operations."
+      "Supported hedge-ledger and financial services workloads in production, driving incident response and change execution for critical services.",
+      "Improved release reliability with stricter pre-production checks and runbook-based recovery to reduce failed and rolled-back changes.",
+      "Coordinated engineering and product teams during incident windows to restore service faster and reduce recovery friction.",
+      "Automated reliability reporting workflows, reducing manual operational effort for on-call and service owners."
     ]
   },
   {
@@ -48,9 +48,9 @@ export const experience: ExperienceRole[] = [
     dates: "Jan 2023 - Jun 2023",
     location: "Bangalore, India",
     bullets: [
-      "Built reliability dashboards in React to centralize infrastructure health signals and speed up production triage.",
-      "Assisted cloud infrastructure monitoring and incident triage by consolidating service-health metrics across environments.",
-      "Supported automation scripts and operational tooling to reduce repetitive manual tasks in infrastructure workflows."
+      "Built React reliability dashboards that consolidated infrastructure health signals into a single operational view for faster first-response triage.",
+      "Unified cross-environment service-health metrics for cloud infrastructure monitoring, improving alert clarity and on-call handoff quality.",
+      "Delivered automation tooling for repetitive infrastructure checks and reporting, removing manual steps from on-call workflows."
     ]
   }
 ];
