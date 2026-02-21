@@ -4,6 +4,7 @@ import { ProjectsSection } from "@/components/projects-section";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteHeader } from "@/components/site-header";
 import { SkillsSection } from "@/components/skills-section";
+import { TrackSwitcher } from "@/components/track-switcher";
 import { TrackProvider } from "@/components/track-context";
 import { experience } from "@/content/experience";
 import { profile, navSections } from "@/content/profile";
@@ -18,7 +19,6 @@ export default function HomePage() {
 
       <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-8 sm:px-6 sm:pt-12">
         <section id="hero" className="scroll-mt-40 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Hero</p>
           <div className="mt-4 grid gap-6 md:grid-cols-[148px_1fr] md:items-center">
             <div className="mx-auto w-fit md:mx-0">
               <ProfileImage
@@ -44,6 +44,29 @@ export default function HomePage() {
                 >
                   {profile.email}
                 </a>
+              </div>
+
+              <div className="mt-4 space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  {profile.interests.slice(0, 6).map((interest) => (
+                    <span
+                      key={interest}
+                      className="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-2.5 py-1 text-xs text-[var(--muted)]"
+                    >
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {profile.rolesInterestedIn.map((role) => (
+                    <span
+                      key={role}
+                      className="rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] px-2.5 py-1 text-xs text-[var(--text)]"
+                    >
+                      {role}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -77,7 +100,6 @@ export default function HomePage() {
 
         <ScrollReveal>
           <section id="about" className="scroll-mt-40 py-14 sm:py-16">
-            <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">About Me</h2>
             <div className="mt-4 space-y-4">
               {profile.about.split("\n\n").map((paragraph) => (
                 <p key={paragraph} className="text-base leading-7 text-[var(--muted)] [text-align:justify]">
@@ -89,12 +111,7 @@ export default function HomePage() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <SkillsSection groups={skillGroups} />
-        </ScrollReveal>
-
-        <ScrollReveal>
           <section id="experience" className="scroll-mt-40 py-14 sm:py-16">
-            <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Experience</h2>
             <div className="mt-6 grid gap-4">
               {experience.map((role) => (
                 <article key={role.id} className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
@@ -116,6 +133,7 @@ export default function HomePage() {
                 </article>
               ))}
             </div>
+            <TrackSwitcher />
           </section>
         </ScrollReveal>
 
@@ -124,12 +142,15 @@ export default function HomePage() {
         </ScrollReveal>
 
         <ScrollReveal>
+          <SkillsSection groups={skillGroups} />
+        </ScrollReveal>
+
+        <ScrollReveal>
           <GitHubActivitySection username={profile.githubUsername} profileUrl={profile.links.github} />
         </ScrollReveal>
 
         <ScrollReveal>
           <section id="interests" className="scroll-mt-40 py-14 sm:py-16">
-            <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Interests</h2>
             <div className="mt-5 flex flex-wrap gap-2">
               {profile.interests.map((interest) => (
                 <span
@@ -148,7 +169,6 @@ export default function HomePage() {
             id="connect"
             className="scroll-mt-40 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8"
           >
-            <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Let&apos;s Connect</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">
               Open to conversations around systems, distributed infrastructure, robotics, and perception engineering.
             </p>

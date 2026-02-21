@@ -24,14 +24,7 @@ export function SkillsSection({ groups }: SkillsSectionProps) {
 
   return (
     <section id="skills" className="scroll-mt-40 py-14 sm:py-16">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Technical Skills</h2>
-        <span className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--muted)]">
-          Track: {activeTrack.label}
-        </span>
-      </div>
-
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {orderedGroups.map((group) => {
           const highlighted = activeTrack.highlightSkillGroups.includes(group.id);
 

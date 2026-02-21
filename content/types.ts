@@ -22,6 +22,7 @@ export type Profile = {
   tagline: string;
   about: string;
   interests: string[];
+  rolesInterestedIn: string[];
   photo: {
     src: string;
     alt: string;

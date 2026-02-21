@@ -5,8 +5,8 @@
   --surface: #f8fcfe;
   --surface-strong: #e4eef3;
   --surface-glass: #f2f8fb;
-  --text: #0a3f52;
-  --muted: #2b5f73;
+  --text: #0a2e52;
+  --muted: #22496b;
   --accent: #0b7a92;
   --accent-soft: #d4eaf1;
   --border: #b9d3dd;
@@ -17,8 +17,8 @@
   --surface: #172229;
   --surface-strong: #203038;
   --surface-glass: #141e24;
-  --text: #7fd7ea;
-  --muted: #62afc0;
+  --text: #ffffff;
+  --muted: #d8e4ed;
   --accent: #2eb6cf;
   --accent-soft: #1b3a46;
   --border: #2c4a55;
@@ -52,11 +52,12 @@ body {
     );
   background-color: var(--bg);
   color: var(--text);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.65;
-  font-weight: 500;
+  font-weight: 400;
   font-family:
-    "Courier New", "Lucida Console", Monaco, Menlo, "SF Mono", "SFMono-Regular", monospace;
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
 
 .dark body {

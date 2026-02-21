@@ -8,7 +8,7 @@ export const profile: Profile = {
   githubUsername: "ashwatthaphatak",
   tagline:
     "Systems engineer passionate about building reliable distributed infrastructure and robotics perception stacks.",
-  about: `I am at the start of my career, but my direction is clear: I am drawn to hard engineering problems where shallow understanding does not survive. I like building strong mental models and pressure-testing them by implementing real systems until the trade-offs are explicit.
+  about: `Richard Feynman had a habit of puncturing the genius myth. He once said, "I was an ordinary person who studied hard. There's no miracle people." That line has shaped how I approach engineering: start from first principles, stay rigorous, and earn understanding through consistent work.
 
 My work sits across operating systems, distributed systems, computer networks, and robotics/perception. I treat these as one connected discipline around concurrency, uncertainty, and reliability, especially when software has to perform under real constraints.
 
@@ -22,6 +22,13 @@ Long term, I want to build large-scale systems with real-world impact: platforms
     "Perception",
     "Operating Systems",
     "Edge ML"
+  ],
+  rolesInterestedIn: [
+    "Distributed Systems Engineer",
+    "Infrastructure Software Engineer",
+    "Site Reliability Engineer",
+    "ML Systems Engineer",
+    "Robotics/Perception Engineer"
   ],
   photo: {
     src: "https://github.com/ashwatthaphatak.png?size=400",
@@ -38,9 +45,9 @@ Long term, I want to build large-scale systems with real-world impact: platforms
 export const navSections: NavSection[] = [
   { id: "hero", label: "Hero" },
   { id: "about", label: "About Me" },
-  { id: "skills", label: "Technical Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "skills", label: "Technical Skills" },
   { id: "github-activity", label: "GitHub Activity" },
   { id: "interests", label: "Interests" },
   { id: "connect", label: "Let's Connect" }

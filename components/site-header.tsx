@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { useTrackContext } from "@/components/track-context";
 import type { NavSection } from "@/content/types";
 
 const THEME_STORAGE_KEY = "theme-preference";
@@ -13,7 +12,6 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
-  const { trackId, setTrackId, tracks } = useTrackContext();
   const [activeSection, setActiveSection] = useState<string>(sections[0]?.id ?? "hero");
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
@@ -64,26 +62,20 @@ export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface-glass)] backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 sm:px-6">
-        <div className="flex items-center justify-between gap-3">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <nav className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
           <a
             href="#hero"
-            className="text-sm font-semibold tracking-wide text-[var(--text)] transition-colors hover:text-[var(--accent)]"
+            onClick={() => setActiveSection("hero")}
+            className={`rounded-full px-3 py-1.5 transition ${
+              activeSection === "hero"
+                ? "bg-[var(--accent-soft)] text-[var(--text)]"
+                : "text-[var(--muted)] hover:bg-[var(--surface-strong)] hover:text-[var(--text)]"
+            }`}
           >
             {siteName}
           </a>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
-            aria-label="Toggle dark mode"
-          >
-            {theme === "dark" ? "Light" : "Dark"}
-          </button>
-        </div>
-
-        <nav className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
-          {sections.map((section) => {
+          {sections.filter((section) => section.id !== "hero").map((section) => {
             const isActive = activeSection === section.id;
 
             return (
@@ -102,26 +94,15 @@ export function SiteHeader({ sections, siteName }: SiteHeaderProps) {
             );
           })}
         </nav>
-
-        <div className="inline-flex w-full flex-wrap gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-1">
-          {tracks.map((track) => {
-            const isActive = track.id === trackId;
-
-            return (
-              <button
-                key={track.id}
-                type="button"
-                onClick={() => setTrackId(track.id)}
-                className={`rounded-lg px-3 py-2 text-xs font-medium transition sm:text-sm ${
-                  isActive
-                    ? "border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--text)] shadow-sm"
-                    : "text-[var(--muted)] hover:bg-[var(--surface-strong)] hover:text-[var(--text)]"
-                }`}
-              >
-                {track.label}
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
+            aria-label="Toggle dark mode"
+          >
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
         </div>
       </div>
     </header>

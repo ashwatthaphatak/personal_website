@@ -8,8 +8,7 @@ export function GitHubActivitySection({ username, profileUrl }: GitHubActivitySe
 
   return (
     <section id="github-activity" className="scroll-mt-40 py-14 sm:py-16">
-      <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">GitHub Activity</h2>
-      <p className="mt-2 text-sm text-[var(--muted)]">
+      <p className="text-sm text-[var(--muted)]">
         Live contribution history from{" "}
         <a
           href={profileUrl}

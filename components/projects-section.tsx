@@ -83,19 +83,13 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
 
   return (
     <section id="projects" className="scroll-mt-40 py-14 sm:py-16">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Projects</h2>
-          <p className="mt-1 text-sm text-[var(--muted)]">
-            Track-based tag filters are applied automatically and can be adjusted below.
-          </p>
-        </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-end">
         <span className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--muted)]">
           {visibleProjects.length} shown
         </span>
       </div>
 
-      <div className="mt-5 grid gap-3">
+      <div className="mt-4 grid gap-3">
         <label htmlFor="project-search" className="text-sm font-medium text-[var(--muted)]">
           Search projects
         </label>
