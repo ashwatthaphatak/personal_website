@@ -57,6 +57,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <h1 className="mt-2 text-3xl font-semibold text-[var(--text)] sm:text-4xl">{post.title}</h1>
         <p className="mt-3 text-base leading-8 text-[var(--muted)]">{post.summary}</p>
 
+        {post.images && post.images.length > 0 ? (
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {post.images.map((image) => (
+              <figure
+                key={`${post.slug}-${image.src}`}
+                className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface-strong)]"
+              >
+                <img src={image.src} alt={image.alt} className="h-auto w-full object-cover" loading="lazy" />
+                {image.caption ? (
+                  <figcaption className="px-3 py-2 text-xs uppercase tracking-[0.08em] text-[var(--muted)]">
+                    {image.caption}
+                  </figcaption>
+                ) : null}
+              </figure>
+            ))}
+          </div>
+        ) : null}
+
         <div className="mt-6 space-y-4">
           {post.content.map((paragraph) => (
             <p key={paragraph} className="text-base leading-8 text-[var(--text)]">
@@ -66,12 +84,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         <div className="mt-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
-          >
-            Back to Blog
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            {post.sourceUrl ? (
+              <a
+                href={post.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
+              >
+                View Original Post
+              </a>
+            ) : null}
+            <Link
+              href="/blog"
+              className="inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
+            >
+              Back to Blog
+            </Link>
+          </div>
         </div>
       </article>
     </main>

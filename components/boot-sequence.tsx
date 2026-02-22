@@ -39,6 +39,12 @@ type BootSequenceContextValue = {
   isBooting: boolean;
 };
 
+declare global {
+  interface Window {
+    __portfolioBootCompleted?: boolean;
+  }
+}
+
 const BootSequenceContext = createContext<BootSequenceContextValue | null>(null);
 
 type BootSequenceProviderProps = {
@@ -47,11 +53,31 @@ type BootSequenceProviderProps = {
 };
 
 export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_DURATION_MS }: BootSequenceProviderProps) {
+  const [hasMounted, setHasMounted] = useState(false);
   const [bootCycle, setBootCycle] = useState(0);
-  const [phase, setPhase] = useState<BootPhase>("boot");
+  const [phase, setPhase] = useState<BootPhase>(() => {
+    if (typeof window !== "undefined" && window.__portfolioBootCompleted) {
+      return "ready";
+    }
+    return "boot";
+  });
   const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    // Skip auto boot on client-side route returns within the same document.
+    // Show it again on full reload/new load because this flag is not persisted.
+    if (!hasMounted) {
+      return;
+    }
+
+    if (bootCycle === 0 && window.__portfolioBootCompleted) {
+      return;
+    }
+
     setPhase("boot");
 
     if (timeoutRef.current) {
@@ -67,7 +93,7 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
         window.clearTimeout(timeoutRef.current);
       }
     };
-  }, [bootCycle, bootDurationMs]);
+  }, [bootCycle, bootDurationMs, hasMounted]);
 
   const reboot = () => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -75,6 +101,7 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
   };
 
   const enterPortfolio = () => {
+    window.__portfolioBootCompleted = true;
     setPhase("ready");
   };
 
@@ -90,8 +117,12 @@ export function BootSequenceProvider({ children, bootDurationMs = DEFAULT_BOOT_D
     <BootSequenceContext.Provider value={value}>
       <MatrixRain />
       <div className="relative z-10">{children}</div>
-      <BiosOverlay visible={phase === "boot"} bootCycle={bootCycle} bootDurationMs={bootDurationMs} />
-      <EnterOverlay visible={phase === "gate"} onEnter={enterPortfolio} />
+      {hasMounted ? (
+        <>
+          <BiosOverlay visible={phase === "boot"} bootCycle={bootCycle} bootDurationMs={bootDurationMs} />
+          <EnterOverlay visible={phase === "gate"} onEnter={enterPortfolio} />
+        </>
+      ) : null}
     </BootSequenceContext.Provider>
   );
 }

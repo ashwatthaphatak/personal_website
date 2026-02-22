@@ -27,11 +27,7 @@ export default function BlogPage() {
     <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-8 sm:px-6">
       <section className="section-card">
         <p className="text-xs font-medium uppercase tracking-[0.14em] text-[var(--muted)]">Writing</p>
-        <h1 className="mt-2 text-3xl font-semibold text-[var(--text)] sm:text-4xl">Blog</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--muted)]">
-          This page is independent from the portfolio sections. Add and edit posts in{" "}
-          <code className="rounded bg-[var(--surface)] px-1 py-0.5">content/blog.ts</code>.
-        </p>
+        <h1 className="mt-2 text-3xl font-semibold text-[var(--text)] sm:text-4xl">Blogs</h1>
         <div className="mt-4">
           <Link
             href="/"
@@ -56,12 +52,24 @@ export default function BlogPage() {
               <p className="text-xs uppercase tracking-[0.1em] text-[var(--muted)]">{formatDate(post.publishedAt)}</p>
               <h2 className="mt-2 text-xl font-semibold text-[var(--text)]">{post.title}</h2>
               <p className="mt-2 text-sm leading-7 text-[var(--muted)]">{post.summary}</p>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="mt-4 inline-flex rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
-              >
-                Read Post
-              </Link>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="inline-flex rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
+                >
+                  Read Post
+                </Link>
+                {post.sourceUrl ? (
+                  <a
+                    href={post.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text)] transition hover:border-[var(--accent)]"
+                  >
+                    View Original
+                  </a>
+                ) : null}
+              </div>
             </article>
           ))}
         </section>

@@ -91,6 +91,12 @@ export type BlogPost = {
   title: string;
   summary: string;
   publishedAt: string;
+  sourceUrl?: string;
+  images?: {
+    src: string;
+    alt: string;
+    caption?: string;
+  }[];
   content: string[];
 };
 

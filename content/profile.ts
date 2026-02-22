@@ -7,7 +7,7 @@ export const profile: Profile = {
   phone: "+1 919-971-3500",
   githubUsername: "ashwatthaphatak",
   tagline:
-    "New Grad (May 2026) passionate about building distributed systems and autonomy/perception technology for the future of computing and robotics.",
+    "Computer Science New Grad (graduating May 2026) passionate about being a part of building the future of computer systems, distributed systems and autonomous driving technology.",
   about: `Richard Feynman had a habit of puncturing the genius myth. He once said, “I was an ordinary person who studied hard. There’s no miracle people.” That line has shaped how I approach engineering at the start of my career: first principles first, rigor over shortcuts, and understanding earned by building and pressure-testing real systems.
 
 My work sits across operating systems, distributed systems, computer networks, and robotics/perception, and I treat them as one discipline around concurrency, uncertainty, and reliability under constraints. I build for correctness and performance under concurrency and failure, and for autonomy/perception pipelines that keep working when compute, latency, and sensing are all constrained.`,
@@ -32,11 +32,12 @@ My work sits across operating systems, distributed systems, computer networks, a
     "Edge ML"
   ],
   rolesInterestedIn: [
+    "Systems Software Engineer",
     "Distributed Systems Engineer",
-    "Infrastructure Software Engineer",
-    "Site Reliability Engineer",
-    "ML Systems Engineer",
-    "Robotics/Perception Engineer"
+    "Production Support Engineer",
+    "Autonomous Driving Engineer",
+    "Robotics/Perception Engineer",
+    "Machine Learning Engineer"
   ],
   photo: {
     src: "/images/linkedin-profile.JPG",

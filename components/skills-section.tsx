@@ -10,7 +10,6 @@ export function SkillsSection({ columns }: SkillsSectionProps) {
       <div className="section-card">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Technical Skills</h2>
-          <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Focused + Interview Defensible</p>
         </div>
 
         <div className="mt-4 grid gap-4 md:grid-cols-3">

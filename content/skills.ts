@@ -13,7 +13,7 @@ export const skillColumns: SkillColumn[] = [
       "Filesystem/Journaling",
       "Kernel + Paging (Xinu)"
     ],
-    familiarLabel: "Studied / Familiar",
+    familiarLabel: "Familiar",
     familiar: ["Consensus/Quorums", "Consistent Hashing", "Vector Clocks", "Failure Detectors"]
   },
   {
@@ -21,7 +21,7 @@ export const skillColumns: SkillColumn[] = [
     title: "Autonomy / Perception / ML",
     strongLabel: "Built with",
     strong: ["ROS2", "Gazebo", "Nav2", "OpenPCDet", "PyTorch", "CARLA"],
-    familiarLabel: "Studied / Familiar",
+    familiarLabel: "Familiar",
     familiar: ["Sensor Fusion", "SLAM", "Kalman/Particle Filters", "RL (SARSA, Q-Learning)"]
   },
   {
@@ -29,7 +29,7 @@ export const skillColumns: SkillColumn[] = [
     title: "Tools",
     strongLabel: "Built with",
     strong: ["Git", "Docker", "GDB", "QEMU", "CMake/Make", "Flask"],
-    familiarLabel: "Studied / Familiar",
+    familiarLabel: "Familiar",
     familiar: ["Kubernetes", "AWS/GCP", "TensorRT", "Tauri"]
   }
 ];

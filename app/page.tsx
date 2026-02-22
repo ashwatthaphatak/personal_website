@@ -25,7 +25,7 @@ export default function HomePage() {
         <section id="hero" className="hero-stage scroll-mt-32">
           <div className="hero-stage__inner">
             <p className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-              New Grad Systems + Autonomy Engineer
+              NC State Computer Science Graduate Student | Systems, Distributed Systems, Autonomous Driving , ML Systems
             </p>
             <h1 className="hero-display mt-4 max-w-6xl text-[clamp(4rem,15vw,12rem)] leading-[0.84] text-[var(--text)]">
               {profile.name}
@@ -87,7 +87,7 @@ export default function HomePage() {
               href="#fast-scan"
               className="mt-6 inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs uppercase tracking-[0.12em] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
             >
-              Recruiter Fast-Scan
+              Want the TL;DR?
               <span aria-hidden>↓</span>
             </a>
           </div>
@@ -97,7 +97,7 @@ export default function HomePage() {
           <section id="fast-scan" className="section-shell">
             <div className="section-card">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Recruiter Fast-Scan</h2>
+                <h2 className="text-2xl font-semibold text-[var(--text)] sm:text-3xl">Recruiters, here are your 10 seconds</h2>
                 <span className="section-kicker">01</span>
               </div>
               <p className="attention-copy mt-4 text-base font-semibold leading-8">
